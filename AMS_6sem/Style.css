@@ -1,0 +1,94 @@
+﻿
+body {
+    scroll-behavior: smooth;
+}
+
+
+    body::-webkit-scrollbar {
+        width: 5px;
+        height: 0.3px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #6b21a8;
+        border-radius: 6px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: whitesmoke;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background-color: #581c87;
+    }
+
+::selection {
+    background-color: #3e004f;
+    color: whitesmoke;
+}
+
+.nav-link {
+    position: relative;
+    text-decoration: none !important;
+    color: #6a136c !important;
+    transition: color 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: #813683 !important;
+    }
+
+    .nav-link::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 10px 10px 0px 0px;
+        background: linear-gradient(180deg, #6b21a81c,#581c8769) !important;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+        opacity: 1;
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: #4f0351;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        transform: scaleX(1);
+    }
+
+    .nav-link.active::after {
+        transform: scaleX(1);
+    }
+
+.active-underline {
+    position: absolute;
+    height: 2px;
+    bottom: 0;
+    background-color: #6a136c;
+    transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.nav-link.home-active::before {
+    opacity: 1;
+}
+
+.nav {
+    background: rgba(13, 13, 13, 0.138);
+    backdrop-filter: blur(0px);
+}
