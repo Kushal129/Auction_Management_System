@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\AMS_6sem"
+    "\\AMS_6sem",
+    "\\AMS_6sem\\adminpage"
   ],
-  "SelectedNode": "\\AMS_6sem\\Style.css",
+  "SelectedNode": "\\AMS_6sem\\adminpage\\winnerreports.aspx",
   "PreviewInSolutionExplorer": false
 }

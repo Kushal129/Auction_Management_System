@@ -108,6 +108,7 @@
         </div>
     </section>
 
+    <%--upcomming auctions--%> 
 
     <!-- Gallary Section -->
     <section class="container mx-auto mt-5" id="product-section">

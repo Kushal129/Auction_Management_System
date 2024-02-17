@@ -92,3 +92,15 @@ body {
     background: rgba(13, 13, 13, 0.138);
     backdrop-filter: blur(0px);
 }
+
+
+#toaster {
+    display: none;
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+}

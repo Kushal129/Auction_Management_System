@@ -50,19 +50,22 @@ namespace AMS_6sem
                                 }
                                 else
                                 {
+                                    //ShowToast("Invalid role value..");
                                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Invalid role value..');", true);
-                                    Response.Write("Invalid role value.");
                                 }
                             }
                             else
                             {
+                                //ShowToast("Invalid role value..");
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Role information is missing.');", true);
-                                Response.Write("Role information is missing.");
                             }
                         }
                         else
                         {
-                            Response.Write("Invalid username or password!");
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('login not found' , 'red')", true);
+
+                            //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "showToaster('Invalid username or password!' , 'red');", true);
+                            //Response.Write("Invalid username or password!");
                         }
                     }
                 }
@@ -96,17 +99,15 @@ namespace AMS_6sem
                         cmd.ExecuteNonQuery();
                     }
                 }
-
-                lblMessage.Text = "Registration successful!";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration successful!');", true);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
-                lblMessage.Text = "Error: " + ex.Message;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration failed! Please try again.');", true);
             }
         }
+
 
     }
 }

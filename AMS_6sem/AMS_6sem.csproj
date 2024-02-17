@@ -68,9 +68,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="adminpage\biddersreports.aspx" />
+    <Content Include="adminpage\dashboard.aspx" />
+    <Content Include="adminpage\participantsreports.aspx" />
+    <Content Include="adminpage\productdetails.aspx" />
+    <Content Include="adminpage\productsreports.aspx" />
+    <Content Include="adminpage\winnerreports.aspx" />
     <Content Include="index.aspx" />
     <Content Include="logreg.aspx" />
     <Content Include="Style.css" />
+    <Content Include="toasterScript.js" />
     <Content Include="user.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -81,6 +88,48 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\biddersreports.aspx.cs">
+      <DependentUpon>biddersreports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\biddersreports.aspx.designer.cs">
+      <DependentUpon>biddersreports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\participantsreports.aspx.cs">
+      <DependentUpon>participantsreports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\participantsreports.aspx.designer.cs">
+      <DependentUpon>participantsreports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\productdetails.aspx.cs">
+      <DependentUpon>productdetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\productdetails.aspx.designer.cs">
+      <DependentUpon>productdetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\productsreports.aspx.cs">
+      <DependentUpon>productsreports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\productsreports.aspx.designer.cs">
+      <DependentUpon>productsreports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\winnerreports.aspx.cs">
+      <DependentUpon>winnerreports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\winnerreports.aspx.designer.cs">
+      <DependentUpon>winnerreports.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
