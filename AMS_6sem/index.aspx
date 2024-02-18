@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="AMS_6sem.index" %>
 
+<%@ Import Namespace="System.Data.SqlClient" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +21,6 @@
 
 </head>
 <body class="font-sans bg-gray-100">
-    <!-- Navbar -->
     <nav class="nav bg-white w-full navbar p-3" id="navbar">
         <div class="container mx-auto flex items-center justify-between">
             <a href="#" class="font-bold text-3xl text-purple-900 hover:text-purple-800">AMS</a>
@@ -67,97 +67,82 @@
         </div>
         <hr class="fade-in text-purple-800" />
     </section>
-
-   
     <!-- live Section -->
     <section class="container mx-auto mt-5" id="live-section">
         <h2 class="flex-col text-center text-3xl font-bold mb-5 text-purple-800">Live Auction Item's </h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="path/to/item1.jpg" alt="Item 1" class="w-full h-40 object-cover mb-4 rounded-md" />
-                <h3 class="text-lg font-semibold mb-2">Item 1</h3>
-                <p class="text-gray-600">Description of Item 1 goes here.</p>
-                <button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900">Bid</button>
-            </div>
-
-            
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="path/to/item2.jpg" alt="Item 2" class="w-full h-40 object-cover mb-4 rounded-md" />
-                <h3 class="text-lg font-semibold mb-2">Item 2</h3>
-                <p class="text-gray-600">Description of Item 2 goes here.</p>
-                <button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900">Bid</button>
-            </div>
-
-            <!-- Display Live Auction Items -->
-        <%--<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            <% foreach (var auctionItem in GetAuctionItemsFromDatabase())
+            <%-- Add server-side code to fetch data from the database and display live auction items dynamically --%>
+            <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
                 { %>
-            <div class="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                <img src="<%= auctionItem.ImageUrl %>" alt="<%= auctionItem.Name %>" class="w-full h-40 object-cover mb-4 rounded-md" />
-                <div>
-                    <h3 class="text-lg font-semibold mb-2"><%= auctionItem.Name %></h3>
-                    <p class="text-gray-600"><%= auctionItem.Description %></p>
-                </div>
-                <button class="bg-purple-800 text-white p-2 mt-2">Bid</button>
+            <% connection.Open(); %>
+            <% string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime > GETDATE()"; %>
+            <% using (SqlCommand command = new SqlCommand(query, connection))
+                { %>
+            <% using (SqlDataReader reader = command.ExecuteReader())
+                { %>
+            <% while (reader.Read())
+                { %>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <%-- Adjust the image path based on your folder structure --%>
+                <img src='<%= ResolveUrl("~/Uploads/product_img/" + reader["FileName"]) %>' alt='<%= reader["ProductName"] %>' class="w-full h-40 object-cover mb-4 rounded-md" />
+                <h3 class="text-lg font-semibold mb-2"><%= reader["ProductName"] %></h3>
+                <p class="text-gray-600"><%= reader["ProductDescription"] %></p>
+                <p class="text-purple-800">Price Interval: <%= reader["ProductPriceInterval"] %></p>
+                <p class="text-purple-800">Min Price: <%= reader["MinPrice"] %></p>
+                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("yyyy-MM-dd HH:mm:ss") %></p>
+                <p class="text-green-500 font-bold">Auction is Live!</p>
+                <button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900">Bid</button>
             </div>
             <% } %>
-        </div>--%>
-
+            <% } %>
+            <% } %>
+            <% } %>
         </div>
     </section>
 
-    <%--upcomming auctions--%> 
+    <!-- Ended Section -->
+
+
+
+
+    <%--upcomming auctions--%>
 
     <!-- Gallary Section -->
     <section class="container mx-auto mt-5" id="product-section">
-        <h2 class="flex-col text-center text-3xl font-bold mb-5 text-purple-800">Product's Gallery </h2>
+        <h2 class="flex-col text-center text-3xl font-bold mb-5 text-purple-800">Ended Auction Item's </h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-
-             <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product1.jpg" alt="Product 1" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 1</h3>
-                <p class="text-gray-600">Product description goes here.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <%-- Add server-side code to fetch data from the database and display ended auction items dynamically --%>
+            <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
+                { %>
+            <% connection.Open(); %>
+            <% string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime <= GETDATE()"; %>
+            <% using (SqlCommand command = new SqlCommand(query, connection))
+                { %>
+            <% using (SqlDataReader reader = command.ExecuteReader())
+                { %>
+            <% while (reader.Read())
+                { %>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <%-- Adjust the image path based on your folder structure --%>
+                <img src='<%= ResolveUrl("~/Uploads/product_img/" + reader["FileName"]) %>' alt='<%= reader["ProductName"] %>' class="w-full h-40 object-cover mb-4 rounded-md" />
+                <h3 class="text-lg font-semibold mb-2"><%= reader["ProductName"] %></h3>
+                <p class="text-gray-600"><%= reader["ProductDescription"] %></p>
+                <p class="text-purple-800">Price Interval: <span class="text-yellow-500"><%= reader["ProductPriceInterval"] %></span></p>
+                <p class="text-purple-800">Min Price: <span class="text-green-500"><%= reader["MinPrice"] %></span></p>
+                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("yyyy-MM-dd HH:mm:ss") %></p>
+                <p class="text-red-500 font-bold">Auction Ended</p>
+                <%--<button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900" disabled>Bid</button>--%>
             </div>
 
-            <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 2</h3>
-                <p class="text-gray-600">Product description goes here.</p>
-            </div>
-
-             <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 2</h3>
-                <p class="text-gray-600">Product description goes here.</p>
-            </div>
-
-             <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 2</h3>
-                <p class="text-gray-600">Product description goes here.</p>
-            </div>
-            
-             <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 2</h3>
-                <p class="text-gray-600">Product description goes here.</p>
-            </div>
-
-             <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 2</h3>
-                <p class="text-gray-600">Product description goes here.</p>
-            </div>
-
-             <div class="bg-white p-4 rounded-md shadow-md">
-                <img src="path/to/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-lg font-semibold">Product 2</h3>
-                <p class="text-gray-600">Product description goes here.</p>
-            </div>
+            <% } %>
+            <% } %>
+            <% } %>
+            <% } %>
         </div>
+    </section>
+    </div>
     </section>
 
     <footer class="bg-purple-900 text-white p-8 mt-5" id="contact-section">

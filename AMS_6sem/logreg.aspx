@@ -73,7 +73,7 @@
                         <label for="txtPassword1" class="block text-sm font-medium text-gray-600">Password:</label>
                         <input type="password" id="Password_R" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password" />
                     </div>
-                    <asp:Button ID="registerButton" runat="server" Text="Register" CssClass="w-full bg-black text-white py-2 px-4 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-green-300" OnClick="registerButton_Click" />
+                    <asp:Button ID="registerButton" runat="server" Text="Register" CssClass="w-full bg-black text-white py-2 px-4 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" OnClick="registerButton_Click" />
                     <p class="mt-4 text-center">Already have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-login-form">Login here</a></span></p>
                     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
                 </div>

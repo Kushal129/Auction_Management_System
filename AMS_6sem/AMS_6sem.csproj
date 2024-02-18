@@ -68,8 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="adminpage\auctioncrate.aspx" />
     <Content Include="adminpage\biddersreports.aspx" />
-    <Content Include="adminpage\dashboard.aspx" />
     <Content Include="adminpage\participantsreports.aspx" />
     <Content Include="adminpage\productdetails.aspx" />
     <Content Include="adminpage\productsreports.aspx" />
@@ -89,19 +89,19 @@
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminpage\auctioncrate.aspx.cs">
+      <DependentUpon>auctioncrate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\auctioncrate.aspx.designer.cs">
+      <DependentUpon>auctioncrate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="adminpage\biddersreports.aspx.cs">
       <DependentUpon>biddersreports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adminpage\biddersreports.aspx.designer.cs">
       <DependentUpon>biddersreports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adminpage\dashboard.aspx.cs">
-      <DependentUpon>dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adminpage\dashboard.aspx.designer.cs">
-      <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminpage\participantsreports.aspx.cs">
       <DependentUpon>participantsreports.aspx</DependentUpon>
@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
+    <Folder Include="Uploads\product_img\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
