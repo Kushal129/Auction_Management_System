@@ -8,5 +8,8 @@
 </head>
 <body>
     <h1>USER</h1>
+   
+<asp:Label ID="lblUserName" runat="server" Text=""></asp:Label>
+
 </body>
 </html>

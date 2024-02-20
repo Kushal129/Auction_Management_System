@@ -6,7 +6,6 @@
 <head runat="server">
     <link href="Style.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    
     <script src="toasterScript.js"></script>
     <style>
         @keyframes fadeIn {
@@ -45,39 +44,40 @@
                     <h2 class="text-3xl font-semibold mb-4 text-center">Login</h2>
                     <div class="mb-4">
                         <label for="txtEmail" class="block text-sm font-medium text-gray-600">Email:</label>
-                        <input type="email" id="txtEmail" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your email address" />
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your email address"></asp:TextBox>
                     </div>
                     <div class="mb-4">
                         <label for="txtPassword" class="block text-sm font-medium text-gray-600">Password:</label>
-                        <input type="password" id="txtPassword" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password" />
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password"></asp:TextBox>
                     </div>
                     <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105  hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-blue-300" OnClick="btnLogin_Click" />
                     <p class="mt-4 text-center">Don't have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-register-form">Register here</a></span> </p>
                 </div>
-
+                <!-- Register From -->
                 <div id="userForm" class="animate__animated animate__fadeIn animate__faster hidden mb-8 p-6">
                     <h2 class="text-3xl font-semibold mb-4 text-center">Register</h2>
                     <div class="mb-4">
                         <label for="txtFullName" class="block text-sm font-medium text-gray-600">Full Name:</label>
-                        <input type="text" id="txtFullName" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your full name" />
+                        <asp:TextBox ID="txtFullName" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your full name"></asp:TextBox>
                     </div>
                     <div class="mb-4">
                         <label for="txtMobileNumber" class="block text-sm font-medium text-gray-600">Mobile Number:</label>
-                        <input type="tel" id="txtMobileNumber" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your mobile number" />
+                        <asp:TextBox ID="txtMobileNumber" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your mobile number"></asp:TextBox>
                     </div>
                     <div class="mb-4">
                         <label for="txtEmail1" class="block text-sm font-medium text-gray-600">Email:</label>
-                        <input type="email" id="Email_R" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your email address" />
+                        <asp:TextBox ID="Email_R" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your email address"></asp:TextBox>
                     </div>
                     <div class="mb-4">
                         <label for="txtPassword1" class="block text-sm font-medium text-gray-600">Password:</label>
-                        <input type="password" id="Password_R" runat="server" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password" />
+                        <asp:TextBox ID="Password_R" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password"></asp:TextBox>
                     </div>
                     <asp:Button ID="registerButton" runat="server" Text="Register" CssClass="w-full bg-black text-white py-2 px-4 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" OnClick="registerButton_Click" />
                     <p class="mt-4 text-center">Already have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-login-form">Login here</a></span></p>
                     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
                 </div>
             </div>
+
 
             <div class="w-1/2 p-8">
                 <h2 class="text-3xl text-center font-semibold mb-4">Welcome to AMS</h2>

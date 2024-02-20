@@ -18,7 +18,6 @@ namespace AMS_6sem
         {
             string username = Request.Form["txtEmail"];
             string password = Request.Form["txtPassword"];
-
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -39,74 +38,100 @@ namespace AMS_6sem
                             if (reader["role"] != DBNull.Value)
                             {
                                 int role = Convert.ToInt32(reader["role"]);
-             
+
                                 if (role == 1)
-                                {                        
+                                {
+                                    Session["UserName"] = username;
+
                                     Response.Redirect("user.aspx");
                                 }
                                 else if (role == 0)
-                                {                              
+                                {
+                                    Session["UserName"] = username;
                                     Response.Redirect("admin.aspx");
                                 }
                                 else
                                 {
-                                    //ShowToast("Invalid role value..");
                                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Invalid role value..');", true);
                                 }
                             }
                             else
                             {
-                                //ShowToast("Invalid role value..");
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Role information is missing.');", true);
                             }
                         }
                         else
                         {
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('login not found' , 'red')", true);
-
-                            //ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "showToaster('Invalid username or password!' , 'red');", true);
-                            //Response.Write("Invalid username or password!");
                         }
                     }
                 }
             }
         }
 
+
         protected void registerButton_Click(object sender, EventArgs e)
         {
-            string fullName = Request.Form["txtFullName"];
-            string mobileNumber = Request.Form["txtMobileNumber"];
-            string email = Request.Form["Email_R"];
-            string password = Request.Form["Password_R"];
+            string fullName = txtFullName.Text;
+            string mobileNumber = txtMobileNumber.Text;
+            string email = Email_R.Text;
+            string password = Password_R.Text;
 
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True";
 
-            string insertQuery = "INSERT INTO tbl_user (fullname, email, mobile, password, role) " +
-                        "VALUES (@FullName, @Email, @MobileNumber, @Password, 1)";
-            try
+            // Check if the email already exists
+            if (IsEmailExists(email, connectionString))
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@FullName", fullName);
-                        cmd.Parameters.AddWithValue("@MobileNumber", mobileNumber);
-                        cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@Password", password);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration successful!');", true);
+                // Email already exists, show an error message
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Email already exists! Please use a different email address.');", true);
             }
-            catch (Exception )
+            else
             {
+                // Email doesn't exist, proceed with registration
+                string insertQuery = "INSERT INTO tbl_user (fullname, email, mobile, password, role) " +
+                    "VALUES (@FullName, @Email, @MobileNumber, @Password, 1)";
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration failed! Please try again.');", true);
+                        using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@FullName", fullName);
+                            cmd.Parameters.AddWithValue("@MobileNumber", mobileNumber);
+                            cmd.Parameters.AddWithValue("@Email", email);
+                            cmd.Parameters.AddWithValue("@Password", password);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration successful!');", true);
+                }
+                catch (Exception)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration failed! Please try again.');", true);
+                }
             }
         }
+
+        private bool IsEmailExists(string email, string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT COUNT(*) FROM tbl_user WHERE email = @Email";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
 
 
     }

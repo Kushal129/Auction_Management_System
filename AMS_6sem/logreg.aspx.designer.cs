@@ -30,7 +30,7 @@ namespace AMS_6sem
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
         /// txtPassword control.
@@ -39,7 +39,7 @@ namespace AMS_6sem
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
         /// btnLogin control.
@@ -57,7 +57,7 @@ namespace AMS_6sem
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFullName;
+        protected global::System.Web.UI.WebControls.TextBox txtFullName;
 
         /// <summary>
         /// txtMobileNumber control.
@@ -66,7 +66,7 @@ namespace AMS_6sem
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtMobileNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtMobileNumber;
 
         /// <summary>
         /// Email_R control.
@@ -75,7 +75,7 @@ namespace AMS_6sem
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Email_R;
+        protected global::System.Web.UI.WebControls.TextBox Email_R;
 
         /// <summary>
         /// Password_R control.
@@ -84,7 +84,7 @@ namespace AMS_6sem
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword Password_R;
+        protected global::System.Web.UI.WebControls.TextBox Password_R;
 
         /// <summary>
         /// registerButton control.

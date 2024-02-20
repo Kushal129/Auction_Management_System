@@ -36,7 +36,7 @@
             </div>
             <div class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:space-x-4" id="nav-links">
                 <a href="#live-section" class="nav-link">Live Auction<span class="active-underline"></span></a>
-                <a href="#product-section" class="nav-link">Product's<span class="active-underline"></span></a>
+                <a href="#upcoming-section" class="nav-link">Upcomming Item's<span class="active-underline"></span></a>
                 <a href="#contact-section" class="nav-link">Contact us<span class="active-underline"></span></a>
                 <a href="logreg.aspx" class="nav-link">Login</a>
             </div>
@@ -65,84 +65,142 @@
                 <img src="img/home.png" alt="Your Image" class="w-full h-auto rounded-md mb-4" />
             </div>
         </div>
-        <hr class="fade-in text-purple-800" />
     </section>
+    <hr class="w-4/5 mx-auto text-purple-800 fade-in mb-5" />
+
     <!-- live Section -->
     <section class="container mx-auto mt-5" id="live-section">
         <h2 class="flex-col text-center text-3xl font-bold mb-5 text-purple-800">Live Auction Item's </h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <%-- Add server-side code to fetch data from the database and display live auction items dynamically --%>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black lg:grid-cols-4 gap-4">
+            <% bool liveAuctionsFound = false; %>
             <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
                 { %>
             <% connection.Open(); %>
-            <% string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime > GETDATE()"; %>
+            <% string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime <= GETDATE() AND AuctionEndTime > GETDATE()"; %>
             <% using (SqlCommand command = new SqlCommand(query, connection))
                 { %>
             <% using (SqlDataReader reader = command.ExecuteReader())
                 { %>
             <% while (reader.Read())
                 { %>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <%-- Adjust the image path based on your folder structure --%>
+            <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
                 <img src='<%= ResolveUrl("~/Uploads/product_img/" + reader["FileName"]) %>' alt='<%= reader["ProductName"] %>' class="w-full h-40 object-cover mb-4 rounded-md" />
-                <h3 class="text-lg font-semibold mb-2"><%= reader["ProductName"] %></h3>
-                <p class="text-gray-600"><%= reader["ProductDescription"] %></p>
-                <p class="text-purple-800">Price Interval: <%= reader["ProductPriceInterval"] %></p>
-                <p class="text-purple-800">Min Price: <%= reader["MinPrice"] %></p>
-                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("yyyy-MM-dd HH:mm:ss") %></p>
+                <h1 class="font-semibold mb-2 text-3xl text-center text-indigo-900"><%= reader["ProductName"] %></h1>
+                <p class="text-gray-600 font-bold">Details: <%= reader["ProductDescription"] %></p>
+                <p class="text-black">Price Interval: <%= reader["ProductPriceInterval"] %></p>
+                <p class="text-black">Min Price: <%= reader["MinPrice"] %></p>
+                <p class="text-black">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm") %></p>
+                <p class="text-black">Auction End Time:<span class="text-lg text-red-500 animate-pulse"> <%= ((DateTime)reader["AuctionEndTime"]).ToString("dd-MM-yyyy HH:mm") %> </span></p>
+                <% DateTime auctionEndTime = (DateTime)reader["AuctionEndTime"]; %>
+                <% DateTime currentTime = DateTime.Now; %>
+                <% if (currentTime >= auctionEndTime)
+                    { %>
+                <p class="text-red-500 font-bold">Auction has Ended</p>
+                <% }
+                    else
+                    { %>
                 <p class="text-green-500 font-bold">Auction is Live!</p>
-                <button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900">Bid</button>
+                <button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900 transition duration-300">Bid</button>
+                <% liveAuctionsFound = true; %>
+                <% } %>
             </div>
+
             <% } %>
             <% } %>
             <% } %>
             <% } %>
         </div>
+
+        <% if (!liveAuctionsFound)
+            { %>
+        <div class="max-w-md mx-auto bg-purple-200 rounded-md cursor-not-allowed overflow-hidden shadow-md mt-4 p-4">
+            <p class="text-red-600 text-center text-lg">No live auctions currently.</p>
+        </div>
+
+        <% } %>
     </section>
+
+
+     <hr class="w-4/5 mx-auto mt-5 text-purple-800 fade-in mb-5" />
+
+    <%--upcomming auctions--%>
+    <section class="container mx-auto mt-5" id="upcoming-section">
+        <h2 class="flex-col text-center text-3xl font-bold mb-5 text-purple-800">Upcoming Auction Items</h2>
+
+        <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
+            { %>
+        <% connection.Open(); %>
+        <% string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime > GETDATE()"; %>
+        <% using (SqlCommand command = new SqlCommand(query, connection))
+            { %>
+        <% using (SqlDataReader reader = command.ExecuteReader())
+            { %>
+        <% if (reader.HasRows)
+            { %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black lg:grid-cols-4 gap-4">
+            <% while (reader.Read())
+                { %>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <img src='<%= ResolveUrl("~/Uploads/product_img/" + reader["FileName"]) %>' alt='<%= reader["ProductName"] %>' class="w-full h-40 object-cover mb-4 rounded-md" />
+                <h1 class="font-semibold mb-2 text-3xl text-center text-indigo-900"><%= reader["ProductName"] %></h1>
+                <p class="text-gray-600">Details: <%= reader["ProductDescription"] %></p>
+                <p class="text-purple-800">Price Interval: <%= reader["ProductPriceInterval"] %></p>
+                <p class="text-purple-800">Min Price: <%= reader["MinPrice"] %></p>
+                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm:ss") %></p>
+                <p class="text-purple-800">Auction End Time: <span class="text-lg text-red-500"><%= ((DateTime)reader["AuctionEndTime"]).ToString("dd-MM-yyyy HH:mm:ss") %> </span></p>
+                <p class="text-blue-500 font-bold">Upcoming Auction</p>
+            </div>
+            <% } %>
+            <% }
+                else
+                { %>
+            <div class="max-w-md mx-auto bg-purple-200 rounded-md cursor-not-allowed overflow-hidden shadow-md mt-4 p-4">
+                <p class="text-red-600 text-center text-lg">No upcoming auctions currently.</p>
+            </div>
+            <% } %>
+        </div>
+        <% } %>
+        <% } %>
+        <% } %>
+    </section>
+
+
+    <hr class="w-4/5 mx-auto mt-5 text-purple-800 fade-in mb-5" />
 
     <!-- Ended Section -->
 
-
-
-
-    <%--upcomming auctions--%>
-
-    <!-- Gallary Section -->
-    <section class="container mx-auto mt-5" id="product-section">
+    <section class="container mx-auto mt-5" id="end-section">
         <h2 class="flex-col text-center text-3xl font-bold mb-5 text-purple-800">Ended Auction Item's </h2>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <%-- Add server-side code to fetch data from the database and display ended auction items dynamically --%>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black lg:grid-cols-4 gap-4">
             <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
                 { %>
             <% connection.Open(); %>
-            <% string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime <= GETDATE()"; %>
+            <% string query = "SELECT TOP 6 * FROM AuctionItems WHERE AuctionEndTime <= GETDATE()"; %>
             <% using (SqlCommand command = new SqlCommand(query, connection))
                 { %>
             <% using (SqlDataReader reader = command.ExecuteReader())
                 { %>
             <% while (reader.Read())
                 { %>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <%-- Adjust the image path based on your folder structure --%>
+            <div class="bg-gray-200 cursor-not-allowed p-4 rounded-lg shadow-md">
                 <img src='<%= ResolveUrl("~/Uploads/product_img/" + reader["FileName"]) %>' alt='<%= reader["ProductName"] %>' class="w-full h-40 object-cover mb-4 rounded-md" />
-                <h3 class="text-lg font-semibold mb-2"><%= reader["ProductName"] %></h3>
-                <p class="text-gray-600"><%= reader["ProductDescription"] %></p>
-                <p class="text-purple-800">Price Interval: <span class="text-yellow-500"><%= reader["ProductPriceInterval"] %></span></p>
-                <p class="text-purple-800">Min Price: <span class="text-green-500"><%= reader["MinPrice"] %></span></p>
-                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("yyyy-MM-dd HH:mm:ss") %></p>
-                <p class="text-red-500 font-bold">Auction Ended</p>
-                <%--<button class="bg-purple-800 text-white w-full p-2 mt-4 hover:bg-purple-900" disabled>Bid</button>--%>
+                <h1 class="font-semibold mb-2 text-3xl text-center text-indigo-900"><%= reader["ProductName"] %></h1>
+                <p class="text-gray-600">Details: <%= reader["ProductDescription"] %></p>
+                <p class="text-purple-800">Price Interval: <%= reader["ProductPriceInterval"] %></p>
+                <p class="text-purple-800">Min Price: <%= reader["MinPrice"] %></p>
+                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm:ss") %></p>
+                <% DateTime auctionEndTime = (DateTime)reader["AuctionEndTime"]; %>
+                <% if (DateTime.Now >= auctionEndTime)
+                    { %>
+                <p class="text-red-500 font-bold">Auction has Ended</p>
+                <% } %>
             </div>
-
             <% } %>
             <% } %>
             <% } %>
             <% } %>
         </div>
-    </section>
-    </div>
     </section>
 
     <footer class="bg-purple-900 text-white p-8 mt-5" id="contact-section">
@@ -157,7 +215,6 @@
             </div>
         </div>
     </footer>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -177,6 +234,8 @@
             });
         });
     </script>
+
+
 </body>
 
 </html>

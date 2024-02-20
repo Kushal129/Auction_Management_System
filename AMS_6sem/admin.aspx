@@ -65,20 +65,23 @@
 
             <div class="my-4 bg-gray-600 h-[1px]"></div>
 
-            <a href="javascript:logout();" class="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700">
-                <i class="fas fa-sign-out-alt"></i>
-                <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout </span>
-            </a>
+            <asp:LinkButton ID="lnkLogout" runat="server" Text="Logout" CssClass="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700" OnClientClick="return confirm('Are you sure you want to logout?');" OnClick="btnLogout_Click">
+    <i class="fas fa-sign-out-alt"></i>
+    <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+            </asp:LinkButton>
+
+
         </div>
     </form>
 
     <div id="dynamic-content" class="ml-[300px] p-6 transition-transform transform duration-300">
-        
+
         <div class="flex-1 overflow-x-hidden overflow-y-auto p-4">
-            <h2 class="text-4xl font-semibold mb-4 p-6 rounded-md shadow-md text-center bg-purple-200 ">Welcome to Your Dashboard</h2>
+            <h2 class="text-4xl font-semibold mb-4 p-6 rounded-md shadow-md text-center bg-purple-200">
+                <asp:Label ID="lblUserName" runat="server" Text=""></asp:Label>
+            </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-
                 <div class="bg-purple-200 p-6 rounded-md shadow-md">
                     <h3 class="text-xl font-semibold mb-2">Total Products</h3>
                     <p class="text-3xl font-bold">250</p>
@@ -93,7 +96,6 @@
                     <h3 class="text-xl font-semibold mb-2">Total Revenue</h3>
                     <p class="text-3xl font-bold">$50,000</p>
                 </div>
-
             </div>
         </div>
     </div>
@@ -110,4 +112,5 @@
         }
     </script>
 </body>
+
 </html>
