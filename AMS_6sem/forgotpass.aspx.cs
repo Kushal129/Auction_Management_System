@@ -62,30 +62,29 @@ namespace AMS_6sem
 
             private void sendpassword(string password, string email)
             {
-                using (SmtpClient smtp = new SmtpClient())
-                {
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.Credentials = new System.Net.NetworkCredential("onlineauctionkp@gmail.com", "ekkb plmb cdbv fzxv");
-                    smtp.EnableSsl = true;
-                    MailMessage msg = new MailMessage();
-                    msg.Subject = "Forgot Password (Auction Management System)";
+            using (SmtpClient smtp = new SmtpClient())
+            {
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.Credentials = new System.Net.NetworkCredential("21bmiit129@gmail.com", "ashw bahu tqbc dbsf");
+                smtp.EnableSsl = true;
+                MailMessage msg = new MailMessage();
                 msg.Subject = "Forgot Password (Auction Management System)";
                 msg.Body = "Dear " + txtEmail.Text + ", Your Password is  " + password + "\n\n\nThanks & Regards\n Auction Management System";
-               
 
-                    msg.To.Add(txtEmail.Text);
-                        string fromaddress = "Auction Management System <onlineauctionkp@gmail.com>";
-                        msg.From = new MailAddress(fromaddress);
-                        try
-                        {
-                            smtp.Send(msg);
-                        }
-                        catch (Exception ex)
-                        {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", $"showToaster('Error: {ex.Message}', 'red');", true);
-                        }
+                msg.To.Add(txtEmail.Text);
+                string fromaddress = "Auction Management System <onlineauctionkp@gmail.com>";
+                msg.From = new MailAddress(fromaddress);
+                try
+                {
+                    smtp.Send(msg);
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", $"showToaster('Error: {ex.Message}', 'red');", true);
                 }
             }
         }
+
     }
+}

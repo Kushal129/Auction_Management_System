@@ -6,6 +6,8 @@
 <head runat="server">
     <link href="Style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <script src="toasterScript.js"></script>
@@ -40,14 +42,14 @@
     </style>
     <title>AMS | Authentication Page</title>
 </head>
-<body class="bg-gray-100">
+<body class="bg-purple-100">
     <div class="toaster-alert" id="toaster"></div>
     <div class="container mx-auto flex justify-center items-center h-screen">
         <form id="mainForm" runat="server" class="max-w-4xl mx-auto flex animate__animated animate__fadeIn animate__faster border rounded-md bg-white shadow-md">
             <div class="w-full md:w-1/2 p-8">
                 <!-- Login Form -->
                 <div id="loginForm" runat="server" class="mb-8 p-6">
-                    <h2 class="text-3xl font-semibold mb-4 text-center">Login</h2>
+                    <h2 class="text-4xl font-semibold text-[#68127f] mb-4 text-center">Login</h2>
                     <div class="mb-4">
                         <label for="txtEmail" class="block text-sm font-medium text-gray-600">Email:</label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your email address"></asp:TextBox>
@@ -69,9 +71,9 @@
 
                 <!-- Register Form -->
                 <div id="userForm" runat="server" class="animate__animated animate__fadeIn animate__faster hidden mb-8 p-6">
-                    <h2 class="text-3xl font-semibold mb-4 text-center">Register</h2>
+                    <h2 class="text-4xl font-semibold mb-4 text-center">Register</h2>
                     <div class="mb-4">
-                        <label for="txtFullName" class="block text-sm font-medium text-gray-600">Full Name:</label>
+                        <label for="txtFullName" class="block text-3xl text-[#68127f] font-medium text-gray-600">Full Name:</label>
                         <asp:TextBox ID="txtFullName" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your full name"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Full Name is required." CssClass="text-red-500" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Only characters are allowed in Full Name." ValidationExpression="^[a-zA-Z\s]*$" CssClass="text-red-500" Display="Dynamic"></asp:RegularExpressionValidator>
@@ -104,48 +106,43 @@
                         <br />
                         <span id="passwordStrength" class="text-sm"></span>
                     </div>
-
-
                     <asp:Button ID="registerButton" runat="server" Text="Register" CssClass="w-full bg-black text-white py-2 px-4 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" OnClick="registerButton_Click" ValidationGroup="LoginGroup" />
                     <p class="mt-4 text-center">Already have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-login-form">Login here</a></span></p>
                     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
                 </div>
 
             </div>
-            <div class="w-1/2 p-8">
-                <h2 class="text-3xl text-center font-semibold mb-4">Welcome to AMS</h2>
-                <img id="form-image" src="img/login.svg" class="mt-3" alt="img" />
+            <div class="w-full md:w-1/2 p-8">
+                <h2 class="text-3xl text-center font-semibold text-center mb-4">Welcome to AMS</h2>
+                <img id="form-image" src="img/login.svg" class="mt-3 items-center" alt="img" />
             </div>
         </form>
     </div>
-    <script src="toasterScript.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    
     <script>
         window.onload = function () {
             const toggleLoginButton = document.getElementById('toggle-login-form');
             const toggleRegisterButton = document.getElementById('toggle-register-form');
             const loginForm = document.getElementById('loginForm');
             const registerForm = document.getElementById('userForm');
-            const resetPasswordForm = document.getElementById('resetPasswordForm');
             const formImage = document.getElementById('form-image');
+
+            formImage.src = 'img/login.svg';
 
             toggleLoginButton.addEventListener('click', function () {
                 loginForm.classList.remove('hidden');
                 registerForm.classList.add('hidden');
-                resetPasswordForm.classList.add('hidden');
                 formImage.src = 'img/login.svg';
             });
 
             toggleRegisterButton.addEventListener('click', function () {
                 registerForm.classList.remove('hidden');
                 loginForm.classList.add('hidden');
-                resetPasswordForm.classList.add('hidden');
                 formImage.src = 'img/regi.svg';
             });
-
         };
     </script>
+
     <script>
         function checkPasswordStrength(password) {
             var result = zxcvbn(password);
