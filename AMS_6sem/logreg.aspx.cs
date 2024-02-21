@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
@@ -14,6 +17,19 @@ namespace AMS_6sem
         {
 
         }
+        protected void ValidateMobileNumber(object source, ServerValidateEventArgs args)
+        {
+            string mobileNumber = args.Value;
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(mobileNumber, "^[6-9]\\d{9}$"))
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             string username = Request.Form["txtEmail"];
@@ -24,45 +40,63 @@ namespace AMS_6sem
             {
                 connection.Open();
 
-                string query = "SELECT * FROM tbl_user WHERE email = @Username AND password = @Password";
+                string emailCheckQuery = "SELECT * FROM tbl_user WHERE email = @Username";
 
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand emailCheckCommand = new SqlCommand(emailCheckQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@Username", username);
-                    command.Parameters.AddWithValue("@Password", password);
+                    emailCheckCommand.Parameters.AddWithValue("@Username", username);
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader emailCheckReader = emailCheckCommand.ExecuteReader())
                     {
-                        if (reader.HasRows && reader.Read())
+                        if (emailCheckReader.HasRows && emailCheckReader.Read())
                         {
-                            if (reader["role"] != DBNull.Value)
-                            {
-                                int role = Convert.ToInt32(reader["role"]);
+                            emailCheckReader.Close();
 
-                                if (role == 1)
-                                {
-                                    Session["UserName"] = username;
+                            string roleCheckQuery = "SELECT * FROM tbl_user WHERE email = @Username AND password = @Password";
 
-                                    Response.Redirect("user.aspx");
-                                }
-                                else if (role == 0)
-                                {
-                                    Session["UserName"] = username;
-                                    Response.Redirect("admin.aspx");
-                                }
-                                else
-                                {
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Invalid role value..');", true);
-                                }
-                            }
-                            else
+                            using (SqlCommand command = new SqlCommand(roleCheckQuery, connection))
                             {
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Role information is missing.');", true);
+                                command.Parameters.AddWithValue("@Username", username);
+                                command.Parameters.AddWithValue("@Password", password);
+
+                                using (SqlDataReader reader = command.ExecuteReader())
+                                {
+                                    if (reader.HasRows && reader.Read())
+                                    {
+                                        if (reader["role"] != DBNull.Value)
+                                        {
+                                            int role = Convert.ToInt32(reader["role"]);
+
+                                            if (role == 1)
+                                            {
+                                                Session["UserName"] = username;
+                                                Response.Redirect("user.aspx");
+                                            }
+                                            else if (role == 0)
+                                            {
+                                                Session["UserName"] = username;
+                                                Response.Redirect("admin.aspx");
+                                            }
+                                            else
+                                            {
+                                                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid role value..!!' , 'red')", true);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Role information is missing.' , 'red')", true);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Incorrect password' , 'red')", true);
+                                    }
+                                }
                             }
                         }
                         else
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('login not found' , 'red')", true);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Email does not exist.' , 'red')", true);
                         }
                     }
                 }
@@ -77,17 +111,30 @@ namespace AMS_6sem
             string email = Email_R.Text;
             string password = Password_R.Text;
 
+            // Additional Validation: Check if any required field is empty
+            if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(mobileNumber) ||
+                string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('All fields are required.');", true);
+                return;
+            }
+
+            // Additional Validation: Check if mobile number is a valid Indian mobile number
+            if (!IsValidIndianMobileNumber(mobileNumber))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Enter a valid Indian mobile number.');", true);
+                return;
+            }
+
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True";
 
             // Check if the email already exists
             if (IsEmailExists(email, connectionString))
             {
-                // Email already exists, show an error message
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Email already exists! Please use a different email address.');", true);
             }
             else
             {
-                // Email doesn't exist, proceed with registration
                 string insertQuery = "INSERT INTO tbl_user (fullname, email, mobile, password, role) " +
                     "VALUES (@FullName, @Email, @MobileNumber, @Password, 1)";
                 try
@@ -106,13 +153,19 @@ namespace AMS_6sem
                             cmd.ExecuteNonQuery();
                         }
                     }
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration successful!');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Registration successful!' , 'red')", true);
+
                 }
                 catch (Exception)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registration failed! Please try again.');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Registration failed! Please try again.' , 'red')", true);
                 }
             }
+        }
+
+        private bool IsValidIndianMobileNumber(string mobileNumber)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(mobileNumber, "^[6-9]\\d{9}$");
         }
 
         private bool IsEmailExists(string email, string connectionString)
@@ -131,8 +184,5 @@ namespace AMS_6sem
                 }
             }
         }
-
-
-
     }
 }

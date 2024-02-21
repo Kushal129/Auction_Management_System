@@ -74,6 +74,7 @@
     <Content Include="adminpage\productdetails.aspx" />
     <Content Include="adminpage\productsreports.aspx" />
     <Content Include="adminpage\winnerreports.aspx" />
+    <Content Include="forgotpass.aspx" />
     <Content Include="index.aspx" />
     <Content Include="logreg.aspx" />
     <Content Include="Style.css" />
@@ -130,6 +131,13 @@
     </Compile>
     <Compile Include="adminpage\winnerreports.aspx.designer.cs">
       <DependentUpon>winnerreports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forgotpass.aspx.cs">
+      <DependentUpon>forgotpass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forgotpass.aspx.designer.cs">
+      <DependentUpon>forgotpass.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
