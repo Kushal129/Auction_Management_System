@@ -153,7 +153,7 @@ namespace AMS_6sem
                             cmd.ExecuteNonQuery();
                         }
                     }
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Registration successful!' , 'red')", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Registration successful..!' , 'green')", true);
 
                 }
                 catch (Exception)

@@ -96,11 +96,15 @@
                         <asp:TextBox ID="Password_R" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password" oninput="checkPasswordStrength(this.value)"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvPassword_R" runat="server" ControlToValidate="Password_R" ErrorMessage="Password is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revPassword_R" runat="server" ControlToValidate="Password_R"
-                            ErrorMessage="Password must have at least one special character, one digit, and a total length of more than 8 characters."
-                            ValidationExpression="^(?=.*[0-9])(?=.*[^a-zA-Z0-9])(?=.{8,})$"
-                            CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RegularExpressionValidator>
-                        <br/><span id="passwordStrength" class="text-sm"></span>
+                            ErrorMessage="Password must be between 6 to 15 characters and contain at least one uppercase letter, one special character, and one number."
+                            ValidationExpression="^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{6,15}$"
+                            CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup">
+                        </asp:RegularExpressionValidator>
+
+                        <br />
+                        <span id="passwordStrength" class="text-sm"></span>
                     </div>
+
 
                     <asp:Button ID="registerButton" runat="server" Text="Register" CssClass="w-full bg-black text-white py-2 px-4 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" OnClick="registerButton_Click" ValidationGroup="LoginGroup" />
                     <p class="mt-4 text-center">Already have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-login-form">Login here</a></span></p>
@@ -151,11 +155,11 @@
 
             var strengthSpan = document.getElementById("passwordStrength");
 
-            strengthSpan.style.color = ""; 
-            strengthSpan.style.fontWeight = ""; 
+            strengthSpan.style.color = "";
+            strengthSpan.style.fontWeight = "";
 
             if (result.score === 0 || result.score === 1) {
-                strengthSpan.style.color = "#ff4d4d"; 
+                strengthSpan.style.color = "#ff4d4d";
                 strengthSpan.style.fontWeight = "bold";
             } else if (result.score === 2 || result.score === 3) {
                 strengthSpan.style.color = "#f5c000";
