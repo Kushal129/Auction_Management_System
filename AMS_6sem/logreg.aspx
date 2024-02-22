@@ -62,10 +62,9 @@
                         <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword" ErrorMessage="Password is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="RegisterGroup"></asp:RequiredFieldValidator>
                     </div>
                     <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105  hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-blue-300" OnClick="btnLogin_Click" ValidationGroup="RegisterGroup" />
-                    <p class="mt-4 text-center">Don't have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-register-form">Register here</a></span></p>
-                    <p class="mt-2 text-center text-[#a43ac0]">
-                        <a href="forgotpass.aspx" id="toggle-reset-password-form">Forgot Password?</a>
-                    </p>
+                    <p class="mt-4 text-center">Don't have an account? <span class="text-[#a43ac0]"><a href="#" id="toggle-register-form">register here</a></span></p>
+                    <p class="mt-2 text-center">You want <span class="text-[#a43ac0]"><a href="forgotpass.aspx" id="toggle-reset-password-form">forgot Password?</a></span></p>
+                    <p class="mt-2 text-center">Back to home? <span class="text-[#a43ac0]"><a href="index.aspx">click here</a></span></p>
                 </div>
 
 

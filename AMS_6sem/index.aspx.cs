@@ -13,5 +13,21 @@ namespace AMS_6sem
         {
 
         }
+        protected void btnBid_Click(object sender, EventArgs e)
+        {
+            if (!UserIsLoggedIn())
+            {
+                Response.Redirect("logreg.aspx");
+            }
+            else
+            { 
+                Response.Redirect("user.aspx");
+            }
+        }
+
+        private bool UserIsLoggedIn()
+        {
+            return Session["UserName"] != null;
+        }
     }
 }

@@ -1,80 +1,129 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="biddersreports.aspx.cs" Inherits="AMS_6sem.adminpage.biddersreports" %>
 
-<div class="container mx-auto p-8 font-sans">
-    <h2 class="text-4xl font-semibold mb-4 text-center">Bidders Reports</h2>
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border rounded-md overflow-hidden shadow-md">
-            <thead class="bg-purple-700 text-white text-center">
-                <tr>
-                    <th class="py-3 px-6">Image</th>
-                    <th class="py-3 px-6">Full Name</th>
-                    <th class="py-3 px-6">Contact No</th>
-                    <th class="py-3 px-6">Email</th>
-                    <th class="py-3 px-6">Status</th>
-                    <th class="py-3 px-6">Action</th>
-                </tr>
-            </thead>
-            <tbody class="bg-purple-200"> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AMS | Bidders</title>
+     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .dt-input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
-                <tr class="text-center">
-                    <td class="py-4 px-6">
-                        <img src="https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_1280.png" alt="User Image" class="w-10 h-10 object-cover rounded-full">
-                    </td>
-                    <td class="py-4 px-6">John Doe</td>
-                    <td class="py-4 px-6">1234567890</td>
-                    <td class="py-4 px-6">john.doe@example.com</td>
-                    <td class="py-4 px-6">
-                        <span class="bg-green-500 text-white py-1 px-3 rounded-md inline-block">Approved</span>
-                    </td>
-                    <td class="py-4 px-6">
-                        <button onclick="showUserDetails('John Doe', '1234567890', 'john.doe@example.com', 'Approved');" class="ml-2 bg-blue-500 text-white py-1 px-3 rounded-md">Details</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <div id="userDetailsModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex items-center justify-center">
-        <div class="bg-white w-full max-w-md p-6 rounded-md shadow-md">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-semibold">User Details</h2>
-                <button onclick="closeUserDetailsModal()" class="text-gray-600 hover:text-gray-800 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
+            .dt-input:focus {
+                background-color: #f0f0f0;
+                outline: none;
+            }
 
-            <img src="https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_1280.png" alt="User Image" class="mx-auto w-32 h-32 rounded-full mb-4">
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
 
-            <p class="mb-2"><strong>Full Name:</strong> <span id="fullName"></span></p>
-            <p class="mb-2"><strong>Contact No:</strong> <span id="contactNo"></span></p>
-            <p class="mb-2"><strong>Email:</strong> <span id="email"></span></p>
-            <p class="mb-4"><strong>Status:</strong> <span id="status"></span></p>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
-            <button onclick="closeUserDetailsModal()" class="bg-gray-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-gray-600 focus:outline-none">Close</button>
-            <button onclick="rejectUser()" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none">Reject</button>
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .close {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body class="bg-purple-100">
+    <h1 class="text-4xl text-center font-semibold mb-6">Auction Items</h1>
+    <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
+        <div class="overflow-x-auto">
+            <form runat="server">
+                <table id="BidderRecord" class="min-w-full">
+                    <thead class="bg-purple-700 text-center text-white">
+                        <tr>
+                            <th class="py-2 px-4 border-b">No</th>
+                            <th class="py-2 px-4 border-b">Bidder Name</th>
+                            <th class="py-2 px-4 border-b">Email</th>
+                            <th class="py-2 px-4 border-b">Contact No</th>
+                            <th class="py-2 px-4 border-b">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <asp:Repeater ID="BidderRecordTable" runat="server">
+                            <ItemTemplate>
+                                <tr class="hover:bg-purple-100 text-center transition-all">
+                                    <td class="py-2 px-4 border-b"><%# Container.ItemIndex + 1 %></td>
+                                    <td class="py-2 px-4 border-b"><%# Eval("fullname") %></td>
+                                    <td class="py-2 px-4 border-b"><%# Eval("email") %></td>
+                                    <td class="py-2 px-4 border-b"><%# Eval("mobile") %></td>
+                                    <td class="py-2 px-4 border-b">
+                                        <asp:Button ID="btnChangeStatus" runat="server" CssClass="btn btn-primary" Text="Change Status" OnClientClick='<%# "changeStatus(" + Eval("uid") + ")" %>' />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                </table>
+                <div class="container mx-auto my-8 px-4">
+                    <div class="container mx-auto my-8 px-4">
+                        <a href="../admin.aspx" class="inline-flex items-center justify-center px-6 py-3 bg-purple-700 text-white font-semibold rounded" onclick="btnGoToAdminPage_Click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left mr-2" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                            </svg>
+                            Go to Admin Page
+                        </a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    var dataTableInitialized = false;
 
-    <script>
-        function showUserDetails(fullName, contactNo, email, status) {
-            document.getElementById('fullName').innerText = fullName;
-            document.getElementById('contactNo').innerText = contactNo;
-            document.getElementById('email').innerText = email;
-            document.getElementById('status').innerText = status;
+    $(document).ready(function () {
+        if (!dataTableInitialized) {
+            $('#BidderRecord').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "responsive": true,
+            });
 
-            document.getElementById('userDetailsModal').classList.remove('hidden');
+            dataTableInitialized = true;
         }
+    });
+</script>
 
-        function closeUserDetailsModal() {
-            document.getElementById('userDetailsModal').classList.add('hidden');
-        }
-
-        function rejectUser(fullName) {
-            // Perform backend action to change user status to "Rejected"
-            // (This is just a client-side example; in a real application, you would make a server-side call)
-            alert(fullName + ' has been rejected.');
-        }
-    </script>
-</div>
+</html>

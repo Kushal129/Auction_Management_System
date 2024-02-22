@@ -3,28 +3,31 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.UI.WebControls;
-using System.Web.Configuration;
 using System.Web.UI;
 
 namespace AMS_6sem.adminpage
 {
     public partial class productsreports : System.Web.UI.Page
     {
-        private static LinkButton sender;
-
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                BindAuctionItemsData();
+            }
+        }
+
+        private void BindAuctionItemsData()
         {
             DataTable auctionItemsTable = GetAuctionItemsData();
             AuctionItemsDataTable.DataSource = auctionItemsTable;
             AuctionItemsDataTable.DataBind();
-
         }
 
         private DataTable GetAuctionItemsData()
         {
             DataTable dataTable = new DataTable();
 
-          
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -64,7 +67,9 @@ namespace AMS_6sem.adminpage
                     cmd.ExecuteNonQuery();
                 }
             }
-            GetAuctionItemsData();
+
+            BindAuctionItemsData();
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "deleteAlert", "alert('Record deleted successfully.');", true);
         }
     }
