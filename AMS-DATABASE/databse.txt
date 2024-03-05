@@ -1,0 +1,27 @@
+====================================================================
+                                AMS                             
+====================================================================
+
+1:- tbl_user
+
+uid	        int	            Unchecked (pk)
+fullname	char(50)	    Unchecked
+email	    varchar(255)	Unchecked
+mobile	    varchar(10)	    Unchecked
+password	varchar(80)	    Unchecked
+role	    int	            Unchecked
+
+-----------------------------------------------------
+
+2:- AuctionItems
+
+AuctionItemId	            int	            Unchecked
+ProductName	                nvarchar(MAX)	Unchecked
+ProductDescription	        nvarchar(MAX)	Unchecked
+FileName	                nvarchar(MAX)	Unchecked
+ProductPriceInterval	    int	            Unchecked
+MinPrice	                int	            Unchecked
+AuctionStartTime	        datetime	    Unchecked
+AuctionEndTime	            datetime	    Unchecked
+
+-----------------------------------------------------
