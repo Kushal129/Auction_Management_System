@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-
 
 namespace AMS_6sem
 {
-    public partial class admin : System.Web.UI.Page
+    public partial class admin1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -49,13 +48,8 @@ namespace AMS_6sem
                 }
             }
         }
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Session.Abandon();
-            Response.Redirect("~/logreg.aspx");
-        }
-
+       
 
     }
+    
 }

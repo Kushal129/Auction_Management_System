@@ -6,6 +6,9 @@
 <head runat="server">
     <link href="Style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <link rel="shortcut icon"
+        href="https://static.vecteezy.com/system/resources/previews/007/258/573/original/ams-letter-logo-design-on-white-background-ams-creative-initials-letter-logo-concept-ams-letter-design-vector.jpg"
+        type="image/x-icon" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
@@ -70,9 +73,9 @@
 
                 <!-- Register Form -->
                 <div id="userForm" runat="server" class="animate__animated animate__fadeIn animate__faster hidden mb-8 p-6">
-                    <h2 class="text-4xl font-semibold mb-4 text-center">Register</h2>
+                    <h2 class="text-4xl font-semibold mb-4 text-[#68127f] text-center">Register</h2>
                     <div class="mb-4">
-                        <label for="txtFullName" class="block text-3xl text-[#68127f] font-medium text-gray-600">Full Name:</label>
+                        <label for="txtFullName" class="block text-[#68127f] font-medium text-gray-600">Full Name:</label>
                         <asp:TextBox ID="txtFullName" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your full name"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Full Name is required." CssClass="text-red-500" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Only characters are allowed in Full Name." ValidationExpression="^[a-zA-Z\s]*$" CssClass="text-red-500" Display="Dynamic"></asp:RegularExpressionValidator>

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Web;
-using System.Globalization;
 
 namespace AMS_6sem.adminpage
 {
@@ -14,12 +16,11 @@ namespace AMS_6sem.adminpage
         {
 
         }
-
         protected void btnCreateAuction_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(productName.Text) ||
                 file_input.PostedFile == null ||
-                file_input.PostedFile.ContentLength == 0 || 
+                file_input.PostedFile.ContentLength == 0 ||
                 string.IsNullOrWhiteSpace(productPriceInterval.Text) ||
                 string.IsNullOrWhiteSpace(minPrice.Text) ||
                 string.IsNullOrWhiteSpace(auctionStartTime.Text) ||
@@ -80,7 +81,7 @@ namespace AMS_6sem.adminpage
                     command.Parameters.AddWithValue("@MinPrice", minPriceValue);
                     command.Parameters.AddWithValue("@AuctionStartTime", (object)auctionStartTimeValue ?? DBNull.Value);
                     command.Parameters.AddWithValue("@AuctionEndTime", (object)auctionEndTimeValue ?? DBNull.Value);
-                    
+
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
@@ -88,8 +89,7 @@ namespace AMS_6sem.adminpage
 
             ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Auction created successfully!');", true);
 
-            Response.Redirect("~/admin.aspx");
+            //Response.Redirect("~/admin.aspx");
         }
-
     }
 }

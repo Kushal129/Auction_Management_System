@@ -68,12 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="adminpage\allorders.aspx" />
     <Content Include="adminpage\auctioncrate.aspx" />
     <Content Include="adminpage\biddersreports.aspx" />
     <Content Include="adminpage\participantsreports.aspx" />
     <Content Include="adminpage\productdetails.aspx" />
     <Content Include="adminpage\productsreports.aspx" />
     <Content Include="adminpage\winnerreports.aspx" />
+    <Content Include="auctionproduct.aspx" />
     <Content Include="forgotpass.aspx" />
     <Content Include="index.aspx" />
     <Content Include="logreg.aspx" />
@@ -89,6 +91,20 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin.Master.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin.Master.designer.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\allorders.aspx.cs">
+      <DependentUpon>allorders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\allorders.aspx.designer.cs">
+      <DependentUpon>allorders.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminpage\auctioncrate.aspx.cs">
       <DependentUpon>auctioncrate.aspx</DependentUpon>
@@ -132,6 +148,13 @@
     <Compile Include="adminpage\winnerreports.aspx.designer.cs">
       <DependentUpon>winnerreports.aspx</DependentUpon>
     </Compile>
+    <Compile Include="auctionproduct.aspx.cs">
+      <DependentUpon>auctionproduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="auctionproduct.aspx.designer.cs">
+      <DependentUpon>auctionproduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="forgotpass.aspx.cs">
       <DependentUpon>forgotpass.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,6 +186,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

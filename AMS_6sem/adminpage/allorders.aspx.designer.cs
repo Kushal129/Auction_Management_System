@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AMS_6sem
+namespace AMS_6sem.adminpage
 {
 
 
-    public partial class admin1
+    public partial class allorders
     {
 
         /// <summary>
-        /// lblUserName control.
+        /// AllorderTableRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserName;
+        protected global::System.Web.UI.WebControls.Repeater AllorderTableRecord;
     }
 }

@@ -1,10 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="participantsreports.aspx.cs" Inherits="AMS_6sem.adminpage.participantsreports" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>AMS | Participants Reports</title>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin.Master" AutoEventWireup="true" CodeBehind="participantsreports.aspx.cs" Inherits="AMS_6sem.adminpage.participantsreports" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <title>AMS | Participants Reports</title>
      <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
@@ -59,8 +55,9 @@
             right: 10px;
         }
     </style>
-</head>
-    <body class="bg-purple-100">
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="flex items-center justify-center h-screen">
         <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
             <h1 class="text-4xl text-center font-semibold mb-6">Participants Reports</h1>
@@ -124,9 +121,9 @@
                 "ordering": true,
                 "info": true,
                 "responsive": true,
-                "order": [], // Default sorting order (remove this line if you want to enable default sorting)
+                "order": [], 
             });
         });
     </script>
-</body>
-</html>
+
+</asp:Content>

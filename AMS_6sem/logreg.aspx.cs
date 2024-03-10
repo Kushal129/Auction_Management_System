@@ -13,6 +13,7 @@ namespace AMS_6sem
 {
     public partial class logreg : System.Web.UI.Page
     {
+        string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -34,7 +35,6 @@ namespace AMS_6sem
         {
             string username = Request.Form["txtEmail"];
             string password = Request.Form["txtPassword"];
-            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -111,27 +111,21 @@ namespace AMS_6sem
             string email = Email_R.Text;
             string password = Password_R.Text;
 
-            // Additional Validation: Check if any required field is empty
             if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(mobileNumber) ||
                 string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('All fields are required.');", true);
-                return;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('All fields are required.' , 'red')", true);
             }
 
-            // Additional Validation: Check if mobile number is a valid Indian mobile number
             if (!IsValidIndianMobileNumber(mobileNumber))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Enter a valid Indian mobile number.');", true);
-                return;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Enter a valid Indian mobile number.' , 'red')", true);
             }
 
-            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True";
 
-            // Check if the email already exists
             if (IsEmailExists(email, connectionString))
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Email already exists! Please use a different email address.');", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Email already exists! Please use a different email address.' , 'red')", true);
             }
             else
             {

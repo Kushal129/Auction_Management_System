@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Web.UI.WebControls;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace AMS_6sem.adminpage
 {
     public partial class productsreports : System.Web.UI.Page
     {
+        string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (IsPostBack)
             {
                 BindAuctionItemsData();
             }
@@ -27,8 +30,6 @@ namespace AMS_6sem.adminpage
         private DataTable GetAuctionItemsData()
         {
             DataTable dataTable = new DataTable();
-
-            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -47,30 +48,25 @@ namespace AMS_6sem.adminpage
 
             return dataTable;
         }
-
-        protected void DeleteRecord(object sender, EventArgs e)
-        {
-            LinkButton btnDelete = (LinkButton)sender;
-            int auctionItemId = Convert.ToInt32(btnDelete.CommandArgument);
-
-            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
-
+         
+        protected void DeleteRecord(string auctionItemId)
+        {  
+           
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                string query = "DELETE FROM AuctionItems WHERE AuctionItemId = @ItemId";
+                string query = "DELETE FROM AuctionItems WHERE AuctionItemId = @AuctionItemId";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@ItemId", auctionItemId);
                     cmd.ExecuteNonQuery();
                 }
             }
-
-            BindAuctionItemsData();
-
             ScriptManager.RegisterStartupScript(this, this.GetType(), "deleteAlert", "alert('Record deleted successfully.');", true);
+            GetAuctionItemsData();
         }
+
+       
     }
 }
