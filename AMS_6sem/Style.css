@@ -104,3 +104,36 @@ body {
     border-radius: 5px;
     z-index: 9999;
 }
+
+
+a {
+    text-decoration: none !important;
+}
+
+.dt-input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+
+    .dt-input:focus {
+        background-color: #f0f0f0;
+        outline: none;
+    }
+
+.transition-all {
+    transition: all 0.3s ease-in-out;
+}
+
+
+.dataTables_length label {
+    font-weight: normal;
+}
+
+.dataTables_length select {
+    margin: 1rem;
+    padding : 1rem;
+}

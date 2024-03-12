@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,62 +12,86 @@ namespace AMS_6sem.adminpage
 {
     public partial class productsreports : System.Web.UI.Page
     {
-        string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
+        string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
+            if (!IsPostBack)
             {
-                BindAuctionItemsData();
+                FetchAuctionItems();
             }
         }
 
-        private void BindAuctionItemsData()
+        protected void FetchAuctionItems()
         {
-            DataTable auctionItemsTable = GetAuctionItemsData();
-            AuctionItemsDataTable.DataSource = auctionItemsTable;
-            AuctionItemsDataTable.DataBind();
-        }
-
-        private DataTable GetAuctionItemsData()
-        {
-            DataTable dataTable = new DataTable();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
 
-                string query = "SELECT * FROM AuctionItems";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+                    string query = "SELECT * FROM AuctionItems";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        dataAdapter.Fill(dataTable);
+                        connection.Open();
+                        DataTable dt = new DataTable();
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
+
+                        Console.WriteLine($"Number of rows fetched: {dt.Rows.Count}");
+
+                        AuctionItemsDataTable.DataSource = dt;
+                        AuctionItemsDataTable.DataBind();
                     }
                 }
             }
-
-            return dataTable;
-        }
-         
-        protected void DeleteRecord(string auctionItemId)
-        {  
-           
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            catch (Exception ex)
             {
-                connection.Open();
+                string errorMessage = "An error occurred while fetching auction items. Error Message: " + ex.Message;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{errorMessage}')", true);
+            }
+        }
 
-                string query = "DELETE FROM AuctionItems WHERE AuctionItemId = @AuctionItemId";
-
-                using (SqlCommand cmd = new SqlCommand(query, connection))
+        protected void DeleteRecord(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    cmd.ExecuteNonQuery();
+                    int Aid = Convert.ToInt32((sender as LinkButton).CommandArgument);
+
+                    string query = "DELETE FROM AuctionItems WHERE AuctionItemId = @AuctionItemId";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@AuctionItemId", Aid);
+
+                        connection.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            FetchAuctionItems();
+                            string successMessage = "Record deleted successfully.";
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{successMessage}')", true);
+                        }
+                        else
+                        {
+                            FetchAuctionItems();
+                            string errorMessage = "Record not found or already deleted.";
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{errorMessage}')", true);
+                        }
+                    }
                 }
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "deleteAlert", "alert('Record deleted successfully.');", true);
-            GetAuctionItemsData();
+            catch (Exception ex)
+            {
+                string errorMessage = "An error occurred while deleting the record. Error Message: " + ex.Message;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{errorMessage}')", true);
+            }
         }
 
-       
     }
+
 }

@@ -15,64 +15,37 @@ namespace AMS_6sem.adminpage
         {
             if (!IsPostBack)
             {
-                BindAuctionItemsData();
+                LoadUserCards();
             }
         }
 
-        private void BindAuctionItemsData()
+        private void LoadUserCards()
         {
-            DataTable auctionItemsTable = GetAuctionItemsData();
-            AuctionItemsDataTable.DataSource = auctionItemsTable;
-            AuctionItemsDataTable.DataBind();
-        }
+            string connectionString = "Your_DB_Connection_String"; 
+            string query = "SELECT * FROM tbl_user";
 
-        private DataTable GetAuctionItemsData()
-        {
-            DataTable dataTable = new DataTable();
-
-            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-
-                string query = "SELECT * FROM AuctionItems";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        dataAdapter.Fill(dataTable);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                
+                            }
+                        }
                     }
                 }
             }
-
-            return dataTable;
-        }
-
-        protected void DeleteRecord(object sender, EventArgs e)
-        {
-            LinkButton btnDelete = (LinkButton)sender;
-            int auctionItemId = Convert.ToInt32(btnDelete.CommandArgument);
-
-            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            catch (Exception ex)
             {
-                connection.Open();
-
-                string query = "DELETE FROM AuctionItems WHERE AuctionItemId = @ItemId";
-
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@ItemId", auctionItemId);
-                    cmd.ExecuteNonQuery();
-                }
+                // Handle exceptions
+                Console.WriteLine(ex.Message);
             }
-
-            BindAuctionItemsData();
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "deleteAlert", "alert('Record deleted successfully.');", true);
         }
     }
 }

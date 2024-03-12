@@ -1,129 +1,74 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin.Master" AutoEventWireup="true" CodeBehind="participantsreports.aspx.cs" Inherits="AMS_6sem.adminpage.participantsreports" %>
+
+<%@ Import Namespace="System.Data.SqlClient" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-     <title>AMS | Participants Reports</title>
-     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .dt-input {
-            width: 200px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-
-            .dt-input:focus {
-                background-color: #f0f0f0;
-                outline: none;
-            }
-
-        .transition-all {
-            transition: all 0.3s ease-in-out;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .close {
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-    </style>
-
+    <title>AMS | Participants Reports</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="flex items-center justify-center h-screen">
-        <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
-            <h1 class="text-4xl text-center font-semibold mb-6">Participants Reports</h1>
-            <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
-                <div class="overflow-x-auto">
-                    <form runat="server">
-                        <table id="ParticipantsTable" class="min-w-full">
-                            <thead class="bg-purple-700 text-white">
-                                <tr>
-                                    <th class="py-2 px-4 border-b">No</th>
-                                    <th class="py-2 px-4 border-b">Full Name</th>
-                                    <th class="py-2 px-4 border-b">Contact</th>
-                                    <th class="py-2 px-4 border-b">Email</th>
-                                    <th class="py-2 px-4 border-b">Product</th>
-                                    <th class="py-2 px-4 border-b">Start Date/Time</th>
-                                    <%--<th class="py-2 px-4 border-b">Action</th>--%>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                <asp:Repeater ID="ParticipantsRepeater" runat="server">
-                                    <ItemTemplate>
-                                        <tr class="hover:bg-purple-100 transition-all">
-                                            <td class="py-2 px-4 border-b"><%# Container.ItemIndex + 1 %></td>
-                                            <td class="py-2 px-4 border-b"><%# Eval("FullName") %></td>
-                                            <td class="py-2 px-4 border-b"><%# Eval("Contact") %></td>
-                                            <td class="py-2 px-4 border-b"><%# Eval("Email") %></td>
-                                            <td class="py-2 px-4 border-b"><%# Eval("Product") %></td>
-                                            <td class="py-2 px-4 border-b"><%# Eval("StartDateTime") %></td>
-                                            <%--<td class="py-2 px-4 border-b">
-                                                <asp:LinkButton ID="btnDelete" runat="server" CommandArgument='<%# Eval("ParticipantId") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');" OnClick="DeleteRecord" CssClass="text-red-500 hover:text-red-600">Delete</asp:LinkButton>
-                                            </td>--%>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </tbody>
-                        </table>
-                        <div class="container mx-auto my-8 px-4">
-                            <div class="container mx-auto my-8 px-4">
-                                <a href="../admin.aspx" class="inline-flex items-center justify-center px-6 py-3 bg-purple-700 text-white font-semibold rounded" onclick="btnGoToAdminPage_Click()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left mr-2" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-                                    </svg>
-                                    Go to Admin Page
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+    <section class="container mx-auto mt-5" id="user-section">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black lg:grid-cols-4 gap-4">
+            <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
+                { %>
+            <% connection.Open(); %>
+            <% string query = "SELECT * FROM tbl_user WHERE uid <> '1'"; %>
+            <% using (SqlCommand command = new SqlCommand(query, connection))
+                { %>
+            <% using (SqlDataReader reader = command.ExecuteReader())
+                { %>
+            <% while (reader.Read())
+                { %>
+            <div class="bg-white p-4 rounded-lg shadow-md transition duration-300 transform hover:shadow-lg hover:bg-purple-100 hover:scale-105">
+                <img src='<%= ResolveUrl("~/Uploads/product_img/1.jpg") %>' class="w-full h-40 object-cover mb-4 rounded-md" />
+                <h1 class="font-semibold mb-2 text-3xl text-center text-indigo-900"><%= reader["fullname"] %></h1>
+                <p class="text-black"><span class="text-black font-bold">User ID:</span> <%= reader["uid"] %></p>
+                <div class="card-action d-flex mt-2 justify-content-sm-between">
+                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
+                        <a href="#" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">
+                            <i class="bi bi-trash"></i
+                        </a>
+                        
+                        <input name="_method" type="hidden" value="DELETE">
+                        <a href="#" data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 showprofile" onclick="showUserProfile('<%= reader["uid"] %>')">
+                            <i class="far fa-user"></i>
+                        </a>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input customerstatus" type="checkbox" data-activations-status="1" data-customer-id="<%= reader["uid"] %>" id="<%= reader["uid"] %>" checked="">
+                    </div>
                 </div>
+            </div>
+            <% } %>
+            <% } %>
+            <% } %>
+            <% } %>
+        </div>
+    </section>
+
+   <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow-md dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">User Profile</h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div class="p-4 space-y-4">
+                <%-- <p>User ID: <span id="modalUserId"></span></p>
+                <p>Fullname: <span id="modalFullname"><%= reader["fullname"] %></span></p>
+                <a href="mailto:<%= reader["email"] %>" class="text-blue-500">Email: <span id="modalEmail"></span></a>
+                <a href="tel:<%= reader["mobile"] %>" class="text-blue-500">Mobile: <span id="modalMobile"></span></a>--%>
+            </div>
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.0/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap4.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#ParticipantsTable').DataTable({
-                "paging": true,
-                "ordering": true,
-                "info": true,
-                "responsive": true,
-                "order": [], 
-            });
-        });
-    </script>
+</div>
 
 </asp:Content>
