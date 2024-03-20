@@ -43,7 +43,7 @@ namespace AMS_6sem.adminpage
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "ErrorAlert", "alert('Error fetching orders. ');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ErrorAlert", "alert('Error fetching orders. '); "+ ex, true);
                 }
             }
 
@@ -59,8 +59,6 @@ namespace AMS_6sem.adminpage
 
             if (updateSuccess)
             {
-                // Update successful, you can perform additional actions or show a success message
-                // For example, redirect to the same page to reflect the changes
                 Response.Redirect(Request.Url.ToString(), true);
             }
             else
@@ -69,33 +67,28 @@ namespace AMS_6sem.adminpage
             }
         }
 
-        // Server-side method to update the status
         private bool UpdateStatus(string orderno)
         {
             try
             {
-                // Perform the update operation in the database
-                // Replace the connection string and update logic with your actual implementation
                 using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
                 {
                     connection.Open();
 
-                    // Assuming you have a SQL query to update the status, replace "YourUpdateQuery" accordingly
                     string updateQuery = "UPDATE tbl_orders SET Status = 2 WHERE orderno = @orderno";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
                         command.Parameters.AddWithValue("@orderno", orderno);
                         int rowsAffected = command.ExecuteNonQuery();
-
-                        // Return true if the update was successful, otherwise false
                         return rowsAffected > 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
+                string errorMessage = "Error Message: " + ex.Message;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{errorMessage}')", true);
                 return false;
             }
         }

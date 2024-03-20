@@ -14,8 +14,12 @@ namespace AMS_6sem.adminpage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+               
+            }
         }
+
         protected void btnCreateAuction_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(productName.Text) ||
@@ -27,6 +31,7 @@ namespace AMS_6sem.adminpage
                 string.IsNullOrWhiteSpace(auctionEndTime.Text) ||
                 string.IsNullOrWhiteSpace(productDescription.Text))
             {
+
                 ScriptManager.RegisterStartupScript(this, GetType(), "ValidationAlert", "alert('Please fill in all required fields including the image.');", true);
                 return;
             }
@@ -45,7 +50,7 @@ namespace AMS_6sem.adminpage
             {
                 if (!DateTime.TryParseExact(auctionStartTime.Text, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var startTime))
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "InvalidStartTimeFormatAlert", "alert('Invalid Auction Start Time format.');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid Auction Start Time format.' , 'red')", true);
                     return;
                 }
                 auctionStartTimeValue = startTime;
@@ -55,8 +60,8 @@ namespace AMS_6sem.adminpage
             if (!string.IsNullOrWhiteSpace(auctionEndTime.Text))
             {
                 if (!DateTime.TryParseExact(auctionEndTime.Text, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var endTime))
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "InvalidEndTimeFormatAlert", "alert('Invalid Auction End Time format.');", true);
+                { 
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid Auction End Time format.' , 'red')", true);
                     return;
                 }
                 auctionEndTimeValue = endTime;
@@ -87,9 +92,7 @@ namespace AMS_6sem.adminpage
                 }
             }
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Auction created successfully!');", true);
-
-            //Response.Redirect("~/admin.aspx");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Auction created successfully!' , 'green')", true);
         }
     }
 }

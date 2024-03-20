@@ -11,25 +11,16 @@ namespace AMS_6sem.adminpage
 {
 
 
-    public partial class productsreports
+    public partial class editproduct
     {
 
         /// <summary>
-        /// tblform control.
+        /// formViewEditProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm tblform;
-
-        /// <summary>
-        /// AuctionItemsDataTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater AuctionItemsDataTable;
+        protected global::System.Web.UI.WebControls.FormView formViewEditProduct;
     }
 }

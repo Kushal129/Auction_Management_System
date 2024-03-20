@@ -97,7 +97,7 @@
             <p class="text-gray-600"><span class="text-black font-bold">Details:</span> <%= reader["ProductDescription"] %></p>
             <p class="text-black"><span class="text-black font-bold">Price Interval:</span> <%= reader["ProductPriceInterval"] %></p>
             <p class="text-black"><span class="text-black font-bold">Min Price:</span> <%= reader["MinPrice"] %></p>
-            <p class="text-black"><span class="text-black font-bold">Auction Start Time:</span> <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm") %></p>
+            <p class="text-black"><span class="text-black font-bold">Auction Start Time:</span><span class="text-lg text-green-500"> <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm") %> </span></p>
             <p class="text-black"><span class="text-black font-bold">Auction End Time:</span><span class="text-lg text-red-500"> <%= ((DateTime)reader["AuctionEndTime"]).ToString("dd-MM-yyyy HH:mm") %> </span></p>
 
             <% DateTime auctionEndTime = (DateTime)reader["AuctionEndTime"]; %>
@@ -165,7 +165,7 @@
                 <p class="text-gray-600">Details: <%= reader["ProductDescription"] %></p>
                 <p class="text-purple-800">Price Interval: <%= reader["ProductPriceInterval"] %></p>
                 <p class="text-purple-800">Min Price: <%= reader["MinPrice"] %></p>
-                <p class="text-purple-800">Auction Start Time: <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm:ss") %></p>
+                <p class="text-purple-800">Auction Start Time: <span class="text-lg text-green-500"> <%= ((DateTime)reader["AuctionStartTime"]).ToString("dd-MM-yyyy HH:mm:ss") %> </span></p>
                 <p class="text-purple-800">Auction End Time: <span class="text-lg text-red-500"><%= ((DateTime)reader["AuctionEndTime"]).ToString("dd-MM-yyyy HH:mm:ss") %> </span></p>
                 <p class="text-blue-500 font-bold">Upcoming Auction</p>
             </div>

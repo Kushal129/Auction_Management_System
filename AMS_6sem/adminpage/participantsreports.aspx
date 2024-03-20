@@ -6,6 +6,7 @@
     <title>AMS | Participants Reports</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <p>Aama all users hase je Client side thi bid marvana hase ne avaya hase ee data hase </p>
     <section class="container mx-auto mt-5" id="user-section">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black lg:grid-cols-4 gap-4">
             <% using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
@@ -25,7 +26,7 @@
                 <div class="card-action d-flex mt-2 justify-content-sm-between">
                     <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
                         <a href="#" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ">
-                            <i class="bi bi-trash"></i
+                            <i class="bi bi-trash"></i>
                         </a>
                         
                         <input name="_method" type="hidden" value="DELETE">

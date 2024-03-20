@@ -71,6 +71,7 @@
     <Content Include="adminpage\allorders.aspx" />
     <Content Include="adminpage\auctioncrate.aspx" />
     <Content Include="adminpage\biddersreports.aspx" />
+    <Content Include="adminpage\editproduct.aspx" />
     <Content Include="adminpage\participantsreports.aspx" />
     <Content Include="adminpage\productdetails.aspx" />
     <Content Include="adminpage\productsreports.aspx" />
@@ -119,6 +120,13 @@
     </Compile>
     <Compile Include="adminpage\biddersreports.aspx.designer.cs">
       <DependentUpon>biddersreports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\editproduct.aspx.cs">
+      <DependentUpon>editproduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\editproduct.aspx.designer.cs">
+      <DependentUpon>editproduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminpage\participantsreports.aspx.cs">
       <DependentUpon>participantsreports.aspx</DependentUpon>

@@ -17,6 +17,7 @@ namespace AMS_6sem.adminpage
         {
             if (!IsPostBack)
             {
+                
                 FetchAuctionItems();
             }
         }
@@ -72,15 +73,15 @@ namespace AMS_6sem.adminpage
 
                         if (rowsAffected > 0)
                         {
+                           
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Record deleted successfully.' , 'green')", true);
+                            Response.Redirect(Request.RawUrl);
+
                             FetchAuctionItems();
-                            string successMessage = "Record deleted successfully.";
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{successMessage}')", true);
                         }
                         else
                         {
-                            FetchAuctionItems();
-                            string errorMessage = "Record not found or already deleted.";
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{errorMessage}')", true);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Record not found or already deleted.' , 'yellow')", true);
                         }
                     }
                 }
@@ -92,6 +93,23 @@ namespace AMS_6sem.adminpage
             }
         }
 
-    }
+        protected string GetAuctionStatus(DateTime startTime, DateTime endTime)
+        {
+            DateTime currentTime = DateTime.Now;
 
+            if (currentTime < startTime)
+            {
+                return "<span class='badge badge-info'>Upcoming</span>";
+            }
+            else if (currentTime >= startTime && currentTime <= endTime)
+            {
+                return "<span class='badge badge-success'>Live</span>";
+            }
+            else
+            {
+                return "<span class='badge badge-danger'>Ended</span>";
+            }
+        }
+
+    }
 }
