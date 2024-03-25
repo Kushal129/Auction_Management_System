@@ -10,7 +10,7 @@
         <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
             <table id="AuctionItems" class="display responsive" width="100%">
                 <thead>
-                    <tr>
+                    <tr class="bg-purple-100">
                         <th class="py-2 px-4 border-b">No</th>
                         <th class="py-2 px-4 border-b">Product Name</th>
                         <th class="py-2 px-4 border-b">Product Description</th>
@@ -27,12 +27,18 @@
                 <tbody class="text-center">
                     <asp:Repeater ID="AuctionItemsDataTable" runat="server">
                         <ItemTemplate>
-                            <tr class="hover:bg-purple-100 text-center transition-all">
-                                <td class="py-2 px-4 border-b"><%# Container.ItemIndex + 1 %></td>
+                            <tr class="bg-purple-300 hover:bg-purple-100 text-center transition-all">
+                                <td class="py-2 px-4 border-b "><%# Container.ItemIndex + 1 %></td>
                                 <td class="py-2 px-4 border-b"><%# Eval("ProductName") %></td>
                                 <td class="py-2 px-4 border-b"><%# Eval("ProductDescription") %></td>
                                 <td class="py-2 px-4 border-b">
-                                    <img src='<%# ResolveUrl("~/Uploads/product_img/") + Eval("FileName") %>' alt="Product Image" class="w-16 h-16 object-cover rounded-full" /></td>
+                                    <div class="relative">
+                                        <img src='<%# ResolveUrl("~/Uploads/product_img/") + Eval("FileName") %>' alt="Product Image" class="w-16 h-16 object-cover rounded-full hover:scale-150 transition-transform duration-300" />
+                                        <div class="hidden absolute top-0 left-0 w-full h-full bg-black bg-opacity-75 flex justify-center items-center">
+                                            <img src='<%# ResolveUrl("~/Uploads/product_img/") + Eval("FileName") %>' alt="Product Image" class="max-w-full max-h-full object-contain" />
+                                        </div>
+                                    </div>
+                                </td>
                                 <td class="py-2 px-4 border-b"><%# Eval("ProductPriceInterval") %></td>
                                 <td class="py-2 px-4 border-b"><%# Eval("MinPrice") %></td>
                                 <td class="py-2 px-4 border-b"><%# Eval("AuctionStartTime") %></td>
@@ -42,12 +48,16 @@
                                 </td>
 
                                 <td class="py-2 px-4 border-b">
-                                    <a href="editproduct.aspx?id=<%# Eval("AuctionItemId") %>" class="btn btn-primary rounded-md text-white-300 hover:text-white-300 p-1">
+                                    <a href="EditProducts.aspx?id=<%# Eval("AuctionItemId") %>"
+                                        class="btn btn-primary rounded-md text-white-300 hover:text-white-300 p-1"
+                                        style='<%# IsEditVisibleStyle(Eval("AuctionStartTime"), Eval("AuctionEndTime")) %>'>
                                         <i class="bi bi-pencil text-white-300 hover:text-white-300"></i>
                                     </a>
-                                    <asp:LinkButton ID="btn_delete" runat="server" CssClass="btn btn-danger rounded-md text-white-300 hover:text-white-300 p-1" CommandArgument='<%# Eval("AuctionItemId") %>' OnClick="DeleteRecord">
-                                            <i class="bi bi-trash text-white-300 hover:text-white-300"></i>
+
+                                    <asp:LinkButton ID="btn_delete" runat="server" CssClass="btn btn-danger rounded-md text-white-300 hover:text-white-300 p-1" CommandArgument='<%# Eval("AuctionItemId") %>' OnClientClick="return confirm('Are you sure you want to delete this record?');" OnClick="DeleteRecord">
+                                           <i class="bi bi-trash text-white-300 hover:text-white-300"></i>
                                     </asp:LinkButton>
+
                                 </td>
                             </tr>
                         </ItemTemplate>
@@ -57,39 +67,39 @@
         </div>
     </form>
 
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        var table = $('#AuctionItems').DataTable({
-            responsive: true,
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: true,
-            columnDefs: [
-                { orderable: false, targets: [0, 9] } 
-            ],
-            language: {
-                search: "Filter: ",
-                info: "Showing _START_ to _END_ of _TOTAL_ items",
-                lengthMenu: "Show _MENU_ items",
-                paginate: {
-                    first: 'First',
-                    last: 'Last',
-                    next: 'Next',
-                    previous: 'Previous'
+    <script>
+        $(document).ready(function () {
+            var table = $('#AuctionItems').DataTable({
+                responsive: true,
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: true,
+                columnDefs: [
+                    { orderable: false, targets: [0, 9] }
+                ],
+                language: {
+                    search: "Filter: ",
+                    info: "Showing _START_ to _END_ of _TOTAL_ items",
+                    lengthMenu: "Show _MENU_ items",
+                    paginate: {
+                        first: 'First',
+                        last: 'Last',
+                        next: 'Next',
+                        previous: 'Previous'
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 
 </asp:Content>

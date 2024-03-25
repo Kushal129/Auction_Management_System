@@ -16,8 +16,7 @@ namespace AMS_6sem.adminpage
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                
+            {   
                 FetchAuctionItems();
             }
         }
@@ -110,6 +109,20 @@ namespace AMS_6sem.adminpage
                 return "<span class='badge badge-danger'>Ended</span>";
             }
         }
+        protected string IsEditVisibleStyle(object startTime, object endTime)
+        {
+            DateTime startTimeValue = Convert.ToDateTime(startTime);
+            DateTime endTimeValue = Convert.ToDateTime(endTime);
+            DateTime currentTime = DateTime.Now;
 
+            if (currentTime < endTimeValue)
+            {
+                return "display: inline-block;"; 
+            }
+            else
+            {
+                return "display: none;"; 
+            }
+        }
     }
 }

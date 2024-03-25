@@ -77,8 +77,8 @@
                     <div class="mb-4">
                         <label for="txtFullName" class="block text-[#68127f] font-medium text-gray-600">Full Name:</label>
                         <asp:TextBox ID="txtFullName" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your full name"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Full Name is required." CssClass="text-red-500" Display="Dynamic"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="revFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Only characters are allowed in Full Name." ValidationExpression="^[a-zA-Z\s]*$" CssClass="text-red-500" Display="Dynamic"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Full Name is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="revFullName" runat="server" ControlToValidate="txtFullName" ErrorMessage="Only charecters allow in Full Name." ValidationExpression="^[a-zA-Z\s]*$" CssClass="text-red-500" Display="Dynamic"></asp:RegularExpressionValidator>
                     </div>
 
                     <div class="mb-4">
@@ -100,7 +100,7 @@
                         <asp:TextBox ID="Password_R" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password" oninput="checkPasswordStrength(this.value)"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvPassword_R" runat="server" ControlToValidate="Password_R" ErrorMessage="Password is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revPassword_R" runat="server" ControlToValidate="Password_R"
-                            ErrorMessage="Password must be between 6 to 15 characters and contain at least one uppercase letter, one special character, and one number."
+                            ErrorMessage="Password must be between 6 to 15 charecters and at least one uppercase letter, one special character, and one number."
                             ValidationExpression="^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{6,15}$"
                             CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup">
                         </asp:RegularExpressionValidator>

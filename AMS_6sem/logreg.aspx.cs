@@ -16,7 +16,10 @@ namespace AMS_6sem
         string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (User.Identity.IsAuthenticated && User.IsInRole("0"))
+            {
+                Response.Redirect("~/admin.aspx");
+            }
         }
         protected void ValidateMobileNumber(object source, ServerValidateEventArgs args)
         {

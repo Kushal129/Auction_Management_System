@@ -12,9 +12,14 @@ namespace AMS_6sem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request["logout"] != null)
+            {
+                Session.Clear();
 
+                Response.Redirect("logreg.aspx");
+            }
         }
-        protected void btnLogout_Click(object sender, EventArgs e)
+        protected void logout(object sender, EventArgs e)
         {
             Session.Clear();
             Session.Abandon();

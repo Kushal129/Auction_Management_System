@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace AMS_6sem
 {
@@ -12,8 +8,15 @@ namespace AMS_6sem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!User.Identity.IsAuthenticated || !User.IsInRole("0") || !IsPostBack)
+            if (User.Identity.IsAuthenticated && User.IsInRole("0"))
             {
+                // Admin is already authenticated, redirect them to another page
+                Response.Redirect("~/dashboard.aspx");
+            }
+
+            if (!IsPostBack)
+            {
+                // Check if the user is logged in using session
                 if (Session["UserName"] != null)
                 {
                     string userEmail = Session["UserName"].ToString();
@@ -34,6 +37,7 @@ namespace AMS_6sem
                             if (result != null)
                             {
                                 lblUserName.Text = "Welcome, " + result.ToString();
+                                ScriptManager.RegisterStartupScript(this, GetType(), "DisableBackButton", "DisableBackButton();", true);
                             }
                             else
                             {
@@ -48,8 +52,5 @@ namespace AMS_6sem
                 }
             }
         }
-       
-
     }
-    
 }

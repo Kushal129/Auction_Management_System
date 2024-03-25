@@ -137,3 +137,15 @@ a {
     margin: 1rem;
     padding : 1rem;
 }
+
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #b700ff !important;
+    border-color: #c629d0c4 !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    background:none !important;
+    border:none !important;
+}

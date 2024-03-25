@@ -18,10 +18,9 @@
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Product name can only contain numbers and characters" ControlToValidate="productName" Display="Dynamic" CssClass="text-red-500" ValidationExpression="^[a-zA-Z0-9\s]+$"></asp:RegularExpressionValidator>
                 </div>
 
-
                 <div class="mb-4">
                     <label for="file_input" class="block text-gray-600 text-sm font-bold mb-2">Upload file</label>
-                    <asp:FileUpload ID="file_input" runat="server" CssClass="w-full border rounded-md p-2" onchange="displayFileName()" />
+                    <asp:FileUpload ID="file_input" runat="server" CssClass="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" onchange="displayFileName()" />
                     <p id="file-name-display" class="mt-2 text-xs text-gray-500 dark:text-gray-300"></p>
                 </div>
 
@@ -37,10 +36,8 @@
                         <label for="minPrice" class="block text-gray-600 text-sm font-bold mb-2">Minimum Price</label>
                         <asp:TextBox ID="minPrice" runat="server" CssClass="w-full border rounded-md p-2" Required="true" TextMode="Number"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Minimum price is required" ControlToValidate="minPrice" Display="Dynamic" CssClass="text-red-500"></asp:RequiredFieldValidator>
-
                     </div>
                 </div>
-
 
                 <div class="mb-4">
                     <label for="auctionStartTime" class="block text-gray-600 text-sm font-bold mb-2">Auction Start Time</label>
@@ -55,8 +52,6 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Auction end time is required" ControlToValidate="auctionEndTime" Display="Dynamic" CssClass="text-red-500"></asp:RequiredFieldValidator>
                     <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="Auction end time must be greater than current date and time" ControlToValidate="auctionEndTime" Display="Dynamic" CssClass="text-red-500" ClientValidationFunction="validateAuctionEndTime"></asp:CustomValidator>
                 </div>
-
-
 
                 <div class="mb-4">
                     <label for="productDescription" class="block text-gray-600 text-sm font-bold mb-2">Product Description</label>
