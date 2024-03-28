@@ -78,6 +78,14 @@
     <Content Include="adminpage\winnerreports.aspx" />
     <Content Include="auctionproduct.aspx" />
     <Content Include="forgotpass.aspx" />
+    <Content Include="img\index_img\home.png" />
+    <Content Include="img\index_img\s1.png" />
+    <Content Include="img\index_img\s2.png" />
+    <Content Include="img\index_img\s3.png" />
+    <Content Include="img\index_img\w1.png" />
+    <Content Include="img\index_img\w2.png" />
+    <Content Include="img\index_img\w3.png" />
+    <Content Include="img\index_img\w4.png" />
     <Content Include="index.aspx" />
     <Content Include="logreg.aspx" />
     <Content Include="Style.css" />
@@ -204,7 +212,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="img\" />
     <Folder Include="Uploads\product_img\" />
   </ItemGroup>
   <PropertyGroup>

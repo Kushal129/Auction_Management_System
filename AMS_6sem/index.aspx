@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 lg:w-1/2 p-4">
-                <img src="img/home.png" alt="Your Image" class="w-full h-auto rounded-md mb-4" />
+                <img src="img/index_img/home.png" alt="Your Image" class="w-full h-auto rounded-md mb-4" />
             </div>
         </div>
     </section>
@@ -229,7 +229,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 p-5">
                 <div class="work-item flex flex-col items-center">
                     <div class="relative">
-                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="https://pixner.net/techbid/techbid/assets/img/work/w1.png" alt="work-img" />
+                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="img/index_img/w1.png" alt="work-img" />
                         <span class="absolute top-0 left-0 transform -translate-x-2/3 -translate-y-2/3 inline-block w-8 h-8 text-center leading-8 bg-purple-800 text-white font-semibold rounded-full">01</span>
                     </div>
                     <div class="content mt-4 text-center">
@@ -239,7 +239,7 @@
                 </div>
                 <div class="work-item flex flex-col items-center">
                     <div class="relative">
-                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="https://pixner.net/techbid/techbid/assets/img/work/w2.png" alt="work-img" />
+                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="img/index_img/w2.png" alt="work-img" />
                         <span class="absolute top-0 left-0 transform -translate-x-2/3 -translate-y-2/3 inline-block w-8 h-8 text-center leading-8 bg-purple-800 text-white font-semibold rounded-full">02</span>
                     </div>
                     <div class="content mt-4 text-center">
@@ -249,7 +249,7 @@
                 </div>
                 <div class="work-item flex flex-col items-center">
                     <div class="relative">
-                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="https://pixner.net/techbid/techbid/assets/img/work/w3.png" alt="work-img" />
+                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="img/index_img/w3.png" alt="work-img" />
                         <span class="absolute top-0 left-0 transform -translate-x-2/3 -translate-y-2/3 inline-block w-8 h-8 text-center leading-8 bg-purple-800 text-white font-semibold rounded-full">03</span>
                     </div>
                     <div class="content mt-4 text-center">
@@ -259,7 +259,7 @@
                 </div>
                 <div class="work-item flex flex-col items-center">
                     <div class="relative">
-                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="https://pixner.net/techbid/techbid/assets/img/work/w4.png" alt="work-img" />
+                        <img class="w-16 h-16 object-cover rounded-full border-2 border-purple-800 p-1" src="img/index_img/w4.png" alt="work-img" />
                         <span class="absolute top-0 left-0 transform -translate-x-2/3 -translate-y-2/3 inline-block w-8 h-8 text-center leading-8 bg-purple-800 text-white font-semibold rounded-full">04</span>
                     </div>
                     <div class="content mt-4 text-center">

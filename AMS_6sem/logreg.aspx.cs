@@ -8,6 +8,8 @@ using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AMS_6sem
 {
@@ -19,6 +21,21 @@ namespace AMS_6sem
             if (User.Identity.IsAuthenticated && User.IsInRole("0"))
             {
                 Response.Redirect("~/admin.aspx");
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
         protected void ValidateMobileNumber(object source, ServerValidateEventArgs args)
@@ -43,7 +60,7 @@ namespace AMS_6sem
             {
                 connection.Open();
 
-                string emailCheckQuery = "SELECT * FROM tbl_user WHERE email = @Username";
+                string emailCheckQuery = "SELECT password, role FROM tbl_user WHERE email = @Username";
 
                 using (SqlCommand emailCheckCommand = new SqlCommand(emailCheckQuery, connection))
                 {
@@ -53,48 +70,29 @@ namespace AMS_6sem
                     {
                         if (emailCheckReader.HasRows && emailCheckReader.Read())
                         {
-                            emailCheckReader.Close();
+                            string hashedPasswordFromDb = emailCheckReader["password"].ToString();
+                            string role = emailCheckReader["role"].ToString();
 
-                            string roleCheckQuery = "SELECT * FROM tbl_user WHERE email = @Username AND password = @Password";
-
-                            using (SqlCommand command = new SqlCommand(roleCheckQuery, connection))
+                            if (VerifyPassword(password, hashedPasswordFromDb))
                             {
-                                command.Parameters.AddWithValue("@Username", username);
-                                command.Parameters.AddWithValue("@Password", password);
-
-                                using (SqlDataReader reader = command.ExecuteReader())
+                                if (role == "1")
                                 {
-                                    if (reader.HasRows && reader.Read())
-                                    {
-                                        if (reader["role"] != DBNull.Value)
-                                        {
-                                            int role = Convert.ToInt32(reader["role"]);
-
-                                            if (role == 1)
-                                            {
-                                                Session["UserName"] = username;
-                                                Response.Redirect("user.aspx");
-                                            }
-                                            else if (role == 0)
-                                            {
-                                                Session["UserName"] = username;
-                                                Response.Redirect("admin.aspx");
-                                            }
-                                            else
-                                            {
-                                                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid role value..!!' , 'red')", true);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Role information is missing.' , 'red')", true);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Incorrect password' , 'red')", true);
-                                    }
+                                    Session["UserName"] = username;
+                                    Response.Redirect("user.aspx");
                                 }
+                                else if (role == "0")
+                                {
+                                    Session["UserName"] = username;
+                                    Response.Redirect("admin.aspx");
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid role value..!!' , 'red')", true);
+                                }
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Incorrect password' , 'red')", true);
                             }
                         }
                         else
@@ -106,6 +104,17 @@ namespace AMS_6sem
             }
         }
 
+        private bool VerifyPassword(string password, string hashedPasswordFromDb)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                string hashedPasswordInput = HashPassword(password);
+
+                return hashedPasswordInput == hashedPasswordFromDb;
+            }
+        }
+
+
 
         protected void registerButton_Click(object sender, EventArgs e)
         {
@@ -113,6 +122,7 @@ namespace AMS_6sem
             string mobileNumber = txtMobileNumber.Text;
             string email = Email_R.Text;
             string password = Password_R.Text;
+            string hashedPassword = HashPassword(password);
 
             if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(mobileNumber) ||
                 string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -145,7 +155,7 @@ namespace AMS_6sem
                             cmd.Parameters.AddWithValue("@FullName", fullName);
                             cmd.Parameters.AddWithValue("@MobileNumber", mobileNumber);
                             cmd.Parameters.AddWithValue("@Email", email);
-                            cmd.Parameters.AddWithValue("@Password", password);
+                            cmd.Parameters.AddWithValue("@Password", hashedPassword);
 
                             cmd.ExecuteNonQuery();
                         }

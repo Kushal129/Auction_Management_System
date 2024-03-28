@@ -186,6 +186,15 @@ namespace AMS_6sem
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail_R;
 
         /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+
+        /// <summary>
         /// Password_R control.
         /// </summary>
         /// <remarks>

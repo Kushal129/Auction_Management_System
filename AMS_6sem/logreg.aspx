@@ -6,7 +6,7 @@
 <head runat="server">
     <link href="Style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-     <link rel="shortcut icon"
+    <link rel="shortcut icon"
         href="https://static.vecteezy.com/system/resources/previews/007/258/573/original/ams-letter-logo-design-on-white-background-ams-creative-initials-letter-logo-concept-ams-letter-design-vector.jpg"
         type="image/x-icon" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -61,7 +61,14 @@
                     </div>
                     <div class="mb-4">
                         <label for="txtPassword" class="block text-sm font-medium text-gray-600">Password:</label>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password"></asp:TextBox>
+                        <div class="relative">
+                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password"></asp:TextBox>
+                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <img onclick="togglePassword('txtPassword', 'eyeIcon', 'eyeSlashIcon')" class="eyeIcon h-5 w-5 text-gray-400 cursor-pointer" src="img/showp.png" alt="Toggle Password" />
+                                <img style="display: none;" class="eyeSlashIcon h-5 w-5 text-gray-400 cursor-pointer" src="img/hidep.png" alt="Toggle Password" />
+
+                            </span>
+                        </div>
                         <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword" ErrorMessage="Password is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="RegisterGroup"></asp:RequiredFieldValidator>
                     </div>
                     <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105  hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-blue-300" OnClick="btnLogin_Click" ValidationGroup="RegisterGroup" />
@@ -89,18 +96,27 @@
                         <asp:CustomValidator ID="cvMobileNumber" runat="server" ControlToValidate="txtMobileNumber" ErrorMessage="Enter a valid 10-digit mobile number." OnServerValidate="ValidateMobileNumber" CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:CustomValidator>
                     </div>
 
+
                     <div class="mb-4">
                         <label for="txtEmail1" class="block text-sm font-medium text-gray-600">Email:</label>
                         <asp:TextBox ID="Email_R" runat="server" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your email address"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvEmail_R" runat="server" ControlToValidate="Email_R" ErrorMessage="Email is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revEmail_R" runat="server" ControlToValidate="Email_R" ErrorMessage="Enter a valid email address." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Email_R" ErrorMessage="least one alphabetical character (a-z)" ValidationExpression="[a-zA-Z0-9]+[a-zA-Z]+[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RegularExpressionValidator>
                     </div>
+
                     <div class="mb-4">
                         <label for="txtPassword1" class="block text-sm font-medium text-gray-600">Password:</label>
-                        <asp:TextBox ID="Password_R" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password" oninput="checkPasswordStrength(this.value)"></asp:TextBox>
+                        <div class="relative">
+                            <asp:TextBox ID="Password_R" runat="server" TextMode="Password" CssClass="Password_R mt-1 p-2 w-full border rounded-md pr-10" placeholder="Enter your password" oninput="checkPasswordStrength(this.value)"></asp:TextBox>
+                            <span class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <img onclick="togglePassword('Password_R', 'eyeIcon', 'eyeSlashIcon')" class="eyeIcon h-5 w-5 text-gray-400 cursor-pointer" src="img/showp.png" alt="Toggle Password" />
+                                <img style="display: none;" class="eyeSlashIcon h-5 w-5 text-gray-400 cursor-pointer" src="img/hidep.png" alt="Toggle Password" />
+                            </span>
+                        </div>
                         <asp:RequiredFieldValidator ID="rfvPassword_R" runat="server" ControlToValidate="Password_R" ErrorMessage="Password is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revPassword_R" runat="server" ControlToValidate="Password_R"
-                            ErrorMessage="Password must be between 6 to 15 charecters and at least one uppercase letter, one special character, and one number."
+                            ErrorMessage="Password must be between 6 to 15 characters and contain at least one uppercase letter, one special character, and one number."
                             ValidationExpression="^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{6,15}$"
                             CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup">
                         </asp:RegularExpressionValidator>
@@ -120,7 +136,7 @@
             </div>
         </form>
     </div>
-    
+
     <script>
         window.onload = function () {
             const toggleLoginButton = document.getElementById('toggle-login-form');
@@ -169,7 +185,28 @@
             }
         }
     </script>
+    <script>
+        function togglePassword(inputId, eyeIconClass, eyeSlashIconClass) {
+            var passwordInput = document.getElementById(inputId);
+            var eyeIcon = document.querySelector("." + eyeIconClass);
+            var eyeSlashIcon = document.querySelector("." + eyeSlashIconClass);
 
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.style.display = "none";
+                eyeSlashIcon.style.display = "inline";
+                setTimeout(function () {
+                    passwordInput.type = "password";
+                    eyeIcon.style.display = "inline";
+                    eyeSlashIcon.style.display = "none";
+                }, 2000);
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.style.display = "inline";
+                eyeSlashIcon.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>

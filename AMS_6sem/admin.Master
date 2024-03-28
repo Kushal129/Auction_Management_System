@@ -87,10 +87,15 @@
 
         <div class="my-4 bg-gray-600 h-[1px]"></div>
 
-        <button id="lnkLogout" class="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700" onclick="logout()">
+        <%--<button id="lnkLogout" class="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700" onclick="logout()">
             <i class="fas fa-sign-out-alt"></i>
             <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
-        </button>
+        </button>--%>
+
+        <a id="lnkLogout" href="logreg.aspx" class="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+        </a>
 
     </div>
 
