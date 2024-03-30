@@ -4,12 +4,13 @@
 
 1:- tbl_user
 
-uid	        int	            Unchecked (pk)
-fullname	char(50)	    Unchecked
-email	    varchar(255)	Unchecked
-mobile	    varchar(10)	    Unchecked
-password	varchar(80)	    Unchecked
-role	    int	            Unchecked
+uid	                    int	            Unchecked (pk)
+fullname	            char(50)	    Unchecked
+email	                varchar(255)	Unchecked
+mobile	                varchar(10)	    Unchecked
+password	            varchar(80)	    Unchecked
+role	                int	            Unchecked
+password_reset_token    varchar(50)     Checked
 
 -----------------------------------------------------
 

@@ -21,6 +21,9 @@ namespace AMS_6sem
             if (User.Identity.IsAuthenticated && User.IsInRole("0"))
             {
                 Response.Redirect("~/admin.aspx");
+            }else if(User.Identity.IsAuthenticated && User.IsInRole("0"))
+            {
+                Response.Redirect("~/userpage/user.aspx");
             }
         }
 
@@ -60,7 +63,7 @@ namespace AMS_6sem
             {
                 connection.Open();
 
-                string emailCheckQuery = "SELECT password, role FROM tbl_user WHERE email = @Username";
+                string emailCheckQuery = "SELECT uid , password, role FROM tbl_user WHERE email = @Username";
 
                 using (SqlCommand emailCheckCommand = new SqlCommand(emailCheckQuery, connection))
                 {
@@ -70,6 +73,7 @@ namespace AMS_6sem
                     {
                         if (emailCheckReader.HasRows && emailCheckReader.Read())
                         {
+                            int userId = Convert.ToInt32(emailCheckReader["uid"]);
                             string hashedPasswordFromDb = emailCheckReader["password"].ToString();
                             string role = emailCheckReader["role"].ToString();
 
@@ -78,11 +82,13 @@ namespace AMS_6sem
                                 if (role == "1")
                                 {
                                     Session["UserName"] = username;
-                                    Response.Redirect("user.aspx");
+                                    Session["UserID"] = userId;
+                                    Response.Redirect("~/user/user.aspx");
                                 }
                                 else if (role == "0")
                                 {
                                     Session["UserName"] = username;
+                                    Session["UserID"] = userId;
                                     Response.Redirect("admin.aspx");
                                 }
                                 else
@@ -139,8 +145,8 @@ namespace AMS_6sem
             }
             else
             {
-                string insertQuery = "INSERT INTO tbl_user (fullname, email, mobile, password, role) " +
-                    "VALUES (@FullName, @Email, @MobileNumber, @Password, 1)";
+                string insertQuery = "INSERT INTO tbl_user (fullname, email, mobile, password) " +
+                    "VALUES (@FullName, @Email, @MobileNumber, @Password)";
                 try
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))

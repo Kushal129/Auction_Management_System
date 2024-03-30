@@ -111,7 +111,6 @@ namespace AMS_6sem.adminpage
 
                                 if (dataChanged)
                                 {
-                                    // Check if Auction Start and End Time are valid DateTime
                                     DateTime auctionStartTime;
                                     DateTime auctionEndTime;
                                     if (!DateTime.TryParse(txtAuctionStart.Text, out auctionStartTime) ||

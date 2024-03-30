@@ -11,18 +11,20 @@ namespace AMS_6sem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = Request.QueryString["email"];
-            string token = Request.QueryString["token"];
+            if (!IsPostBack)
+            {
+                string email = Request.QueryString["email"];
+                string token = Request.QueryString["token"];
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
-            {
-                Response.Redirect("~/forgotpass.aspx");
-                
-            }
-            else
-            {
-                ViewState["email"] = email;
-                ViewState["token"] = token;
+                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+                {
+                    Response.Redirect("~/forgotpass.aspx");
+                }
+                else
+                {
+                    ViewState["email"] = email;
+                    ViewState["token"] = token;
+                }
             }
         }
 
@@ -65,7 +67,9 @@ namespace AMS_6sem
                         }
                         else
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid password reset link.' , 'red')", true);
+                            //Response.Redirect("~/forgotpass.aspx");
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Invalid password reset link Please Generate new link. ' , 'red')", true);
+                            return;
                         }
                     }
                     catch (Exception ex)

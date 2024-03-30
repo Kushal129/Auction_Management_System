@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="adminpage\adminprofile.aspx" />
     <Content Include="adminpage\allorders.aspx" />
     <Content Include="adminpage\auctioncrate.aspx" />
     <Content Include="adminpage\biddersreports.aspx" />
@@ -108,6 +109,13 @@
     </Compile>
     <Compile Include="admin.Master.designer.cs">
       <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adminpage\adminprofile.aspx.cs">
+      <DependentUpon>adminprofile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpage\adminprofile.aspx.designer.cs">
+      <DependentUpon>adminprofile.aspx</DependentUpon>
     </Compile>
     <Compile Include="adminpage\allorders.aspx.cs">
       <DependentUpon>allorders.aspx</DependentUpon>
