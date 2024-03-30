@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\AMS_6sem",
-    "\\AMS_6sem\\adminpage"
+    "\\AMS_6sem\\adminpage",
+    "\\AMS_6sem\\Properties"
   ],
-  "SelectedNode": "\\AMS_6sem\\admin.Master",
+  "SelectedNode": "\\AMS_6sem\\Web.Release.config",
   "PreviewInSolutionExplorer": false
 }

@@ -4,8 +4,9 @@
 
 <html>
 <head runat="server">
+    <title>AMS | Admin Page</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
-        <title>AMS | Admin Page</title>
+        
     </asp:ContentPlaceHolder>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -86,11 +87,6 @@
 
 
         <div class="my-4 bg-gray-600 h-[1px]"></div>
-
-        <%--<button id="lnkLogout" class="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
-        </button>--%>
 
         <a id="lnkLogout" href="logreg.aspx" class="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700">
             <i class="fas fa-sign-out-alt"></i>

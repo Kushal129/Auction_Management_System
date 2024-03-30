@@ -11,7 +11,7 @@ namespace AMS_6sem
 {
 
 
-    public partial class forgotpass
+    public partial class Forgotpass
     {
 
         /// <summary>
@@ -49,24 +49,6 @@ namespace AMS_6sem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
-
-        /// <summary>
-        /// txtOTP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOTP;
-
-        /// <summary>
-        /// rfvOTP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOTP;
 
         /// <summary>
         /// btnSubmit control.

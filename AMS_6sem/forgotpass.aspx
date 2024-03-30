@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="forgotpass.aspx.cs" Inherits="AMS_6sem.forgotpass" %>
+﻿﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Forgotpass.aspx.cs" Inherits="AMS_6sem.Forgotpass" %>
 
 <!DOCTYPE html>
 
@@ -24,12 +24,6 @@
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your email" />
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Email is required." CssClass="text-red-500" />
                     <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Invalid email format." ValidationExpression="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" CssClass="text-red-500" />
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="txtEmail">Email Address</label>
-                    <asp:TextBox ID="txtOTP" runat="server" CssClass="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter OTP" />
-                    <asp:RequiredFieldValidator ID="rfvOTP" runat="server" ControlToValidate="txtOTP" Display="Dynamic" ErrorMessage="OTP is required." CssClass="text-red-500" />
                 </div>
 
                 <asp:Button ID="btnSubmit" runat="server" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-blue-300" Text="Submit" OnClick="btnSubmit_Click" />

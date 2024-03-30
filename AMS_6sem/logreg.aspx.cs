@@ -113,9 +113,6 @@ namespace AMS_6sem
                 return hashedPasswordInput == hashedPasswordFromDb;
             }
         }
-
-
-
         protected void registerButton_Click(object sender, EventArgs e)
         {
             string fullName = txtFullName.Text;

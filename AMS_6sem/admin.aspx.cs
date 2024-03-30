@@ -10,13 +10,11 @@ namespace AMS_6sem
         {
             if (User.Identity.IsAuthenticated && User.IsInRole("0"))
             {
-                // Admin is already authenticated, redirect them to another page
-                Response.Redirect("~/dashboard.aspx");
+                   Response.Redirect("~/dashboard.aspx");
             }
 
             if (!IsPostBack)
             {
-                // Check if the user is logged in using session
                 if (Session["UserName"] != null)
                 {
                     string userEmail = Session["UserName"].ToString();
