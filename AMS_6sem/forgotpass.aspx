@@ -14,6 +14,7 @@
 </head>
 <body class="bg-purple-100">
     <div class="toaster-alert" id="toaster"></div>
+    <a href="Forgotpass.aspx">Forgotpass.aspx</a>
     <div class="container mx-auto flex justify-center items-center h-screen">
         <form id="mainForm" runat="server" class="max-w-4xl mx-auto flex flex-col md:flex-row animate__animated animate__fadeIn animate__faster border rounded-md bg-white shadow-md p-4">
             <div class="md:w-1/2 p-4">

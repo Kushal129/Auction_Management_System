@@ -3,8 +3,9 @@
     "",
     "\\AMS_6sem",
     "\\AMS_6sem\\adminpage",
-    "\\AMS_6sem\\Properties"
+    "\\AMS_6sem\\Properties",
+    "\\AMS_6sem\\userpage"
   ],
-  "SelectedNode": "\\AMS_6sem\\Forgotpass.aspx.cs",
+  "SelectedNode": "\\AMS_6sem\\logreg.aspx",
   "PreviewInSolutionExplorer": false
 }

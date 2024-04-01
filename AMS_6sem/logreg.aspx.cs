@@ -83,7 +83,7 @@ namespace AMS_6sem
                                 {
                                     Session["UserName"] = username;
                                     Session["UserID"] = userId;
-                                    Response.Redirect("~/user/user.aspx");
+                                    Response.Redirect("~/userpage/UserIndex.aspx");
                                 }
                                 else if (role == "0")
                                 {

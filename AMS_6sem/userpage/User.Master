@@ -1,0 +1,144 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.Master.cs" Inherits="User_Side.SiteMaster" %>
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>AMS | User Index</title>
+     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="Style.css" rel="stylesheet" />
+    <script src="/toasterScript.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" / >
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/dist/font/bootstrap-icons.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<style>
+    a:hover {
+        background: lightpurple;
+    }
+
+    .navbar {
+        background-color: #6b46c1; /* Purple color */
+        padding: 1rem 0;
+    }
+
+    .navbar-brand {
+        font-weight: bold;
+        color: #fff; /* White text color */
+    }
+
+        .navbar-brand:hover {
+            color: #8c64d3; /* Light purple on hover */
+        }
+
+    .nav-link {
+        color: #fff; /* White text color */
+    }
+
+        .nav-link:hover {
+            color: #8c64d3; /* Light  purple on hover */
+        }
+
+    .ovel {
+        background-color: #581C87; /* Purple color */
+        color: #fff; /* White text color */
+        padding: 4rem 0;
+        margin-top: auto;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-top-left-radius: 50% 20%;
+        border-top-right-radius: 50% 20%;
+        overflow: hidden;
+    }
+
+    .footer a {
+        color: #fff; /* White link color */
+    }
+
+        .footer a:hover {
+            color: #8c64d3; /* Light purple on hover */
+        }
+</style>
+<body class="font-sans bg-purple-100">
+    <form id="Form1" runat="server">
+        <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+        <div class="mm">
+            <nav class="bg-purple-900 text-white navbar p-3" id="navbar">
+                <div class="container  mx-auto flex items-center justify-between">
+                    <a href="index.aspx" class="font-bold  bg-purple-900 text-white  hover:text-purple-800">AMS</a>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-toggle" class="text-purple-900 focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16m-7 6h7">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:space-x-4" id="nav-links">
+                        <a href="#live-section" class="nav-link">Live Auction<span class="active-underline"></span></a>
+                        <a href="#upcoming-section" class="nav-link">Upcomming Item's<span class="active-underline"></span></a>
+                        <a href="#contact-section" class="nav-link">Contact us<span class="active-underline"></span></a>
+                        <a href="Userlogin.aspx" class="nav-link">Login</a>
+                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout" CssClass="nav-link cursor-pointer flex items-center p-2.5 mt-3 rounded-md px-4 text-white duration-300 hover:bg-purple-700">
+                            <i class="fas fa-sign-out-alt"></i>
+                                <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+                        </asp:LinkButton>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <footer class="footer">
+            <%--<div class="bg-purple-900 text-white p-8 mt-5" id="contact-section">--%>
+            <div class="ovel">
+                <div class="container">
+                    Auction Management System
+                <div class="social-icons">
+                    <a href="https://twitter.com/" class="text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/" class="text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/" class="text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+                </div>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>
+
+
+

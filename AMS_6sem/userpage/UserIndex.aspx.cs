@@ -1,21 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
-namespace AMS_6sem
+namespace User_Side
 {
-    public partial class admin1 : System.Web.UI.Page
+    public partial class Index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated && User.IsInRole("0"))
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("1") || !IsPostBack)
             {
-                   Response.Redirect("~/dashboard.aspx");
-            }
-
-            if (!IsPostBack)
-            {
-                if (Session["UserName"] != null)
+                if (Session["UserName"] != null && Session["UserId"] != null)
                 {
                     string userEmail = Session["UserName"].ToString();
                     string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
@@ -35,7 +34,6 @@ namespace AMS_6sem
                             if (result != null)
                             {
                                 lblUserName.Text = "Welcome, " + result.ToString();
-                                ScriptManager.RegisterStartupScript(this, GetType(), "DisableBackButton", "DisableBackButton();", true);
                             }
                             else
                             {
@@ -48,12 +46,19 @@ namespace AMS_6sem
                 {
                     Response.Redirect("~/logreg.aspx");
                 }
-
-                if (Session["UserName"] == null)
-                {
-                    Response.Redirect("~/logreg.aspx");
-                }
+            }
+            else
+            {
+                Response.Redirect("~/logreg.aspx");
             }
         }
+
+        //protected void btnLogout_Click(object sender, EventArgs e)
+        //{
+        //    // Perform logout actions, such as clearing session, redirecting to login page, etc.
+        //    Session.Clear(); // Clear session variables
+        //    Response.Redirect("Userlogin.aspx"); // Redirect to the login page
+
+        //}
     }
 }
