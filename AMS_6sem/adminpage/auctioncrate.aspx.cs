@@ -14,10 +14,7 @@ namespace AMS_6sem.adminpage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-               
-            }
+           
         }
 
         protected void btnCreateAuction_Click(object sender, EventArgs e)

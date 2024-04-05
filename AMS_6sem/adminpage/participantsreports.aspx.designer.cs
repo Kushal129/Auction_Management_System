@@ -13,5 +13,14 @@ namespace AMS_6sem.adminpage
 
     public partial class participantsreports
     {
+
+        /// <summary>
+        /// UserRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater UserRepeater;
     }
 }

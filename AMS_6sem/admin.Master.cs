@@ -12,17 +12,10 @@ namespace AMS_6sem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] == null && Session["UserName"] == null)
-            {
-                Response.Redirect("logreg.aspx");
-            }
-        }
-        protected void logout(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Session.RemoveAll();
-            Session.Abandon();
-            Response.Redirect("~/logreg.aspx");
+            //if (Session["UserID"] == null && Session["UserName"] == null)
+            //{
+            //    Response.Redirect("~/Login.aspx");
+            //}
         }
     }
 }

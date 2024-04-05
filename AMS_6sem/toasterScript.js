@@ -7,5 +7,5 @@
 
     setTimeout(function () {
         toaster.style.display = "none";
-    }, 4000);
+    }, 5000);
 }

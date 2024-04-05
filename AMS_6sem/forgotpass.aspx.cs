@@ -9,9 +9,8 @@ using System.Data;
 
 namespace AMS_6sem
 {
-    public partial class Forgotpass : System.Web.UI.Page
+    public partial class Forgotpass1 : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -46,7 +45,7 @@ namespace AMS_6sem
 
                 SendPasswordResetLink(email, resetToken);
 
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('An email with instructions to reset your password has been sent to your email address..' , 'blue')", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Link sent to your email address..' , 'blue')", true);
             }
             else
             {
@@ -84,17 +83,18 @@ namespace AMS_6sem
             smtp.Port = 587;
             smtp.Credentials = new System.Net.NetworkCredential("21bmiit129@gmail.com", "rfkhielzatntivym");
             smtp.EnableSsl = true;
-            
+
 
             try
             {
                 smtp.Send(message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Error:- ' "+ex+", 'red')", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Error:- ' " + ex + ", 'red')", true);
             }
         }
     }
 }
+
 // rfkhielzatntivym

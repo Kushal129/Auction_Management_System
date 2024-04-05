@@ -17,17 +17,17 @@ namespace AMS_6sem
         {
             if (!UserIsLoggedIn())
             {
-                Response.Redirect("logreg.aspx");
+                Response.Redirect("login.aspx");
             }
             else
-            { 
-                Response.Redirect("user.aspx");
+            {
+                Response.Redirect("~/userpage/UserIndex.aspx");
             }
         }
 
         private bool UserIsLoggedIn()
         {
-            return Session["UserName"] != null;
+            return Session["UserName"] != null && Session["UserID"] != null;
         }
     }
 }

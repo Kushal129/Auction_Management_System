@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace AMS_6sem
 {
-    public partial class auctionproduct : System.Web.UI.Page
+    public partial class navfooter : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

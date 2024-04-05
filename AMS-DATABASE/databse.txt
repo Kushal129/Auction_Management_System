@@ -4,25 +4,56 @@
 
 1:- tbl_user
 
-uid	                    int	            Unchecked (pk)
-fullname	            char(50)	    Unchecked
-email	                varchar(255)	Unchecked
-mobile	                varchar(10)	    Unchecked
-password	            varchar(80)	    Unchecked
-role	                int	            Unchecked
-password_reset_token    varchar(50)     Checked
+CREATE TABLE tbl_user (
+    uid INT PRIMARY KEY IDENTITY,
+    fullname CHAR(50),
+    email VARCHAR(255),
+    mobile VARCHAR(10),
+    password VARCHAR(80),
+    role INT,
+    password_reset_token VARCHAR(50) NULL,
+    user_img NVARCHAR(MAX) NULL
+);
+
+
 
 -----------------------------------------------------
 
 2:- AuctionItems
 
-AuctionItemId	            int	            Unchecked
-ProductName	                nvarchar(MAX)	Unchecked
-ProductDescription	        nvarchar(MAX)	Unchecked
-FileName	                nvarchar(MAX)	Unchecked
-ProductPriceInterval	    int	            Unchecked
-MinPrice	                int	            Unchecked
-AuctionStartTime	        datetime	    Unchecked
-AuctionEndTime	            datetime	    Unchecked
+CREATE TABLE AuctionItems (
+    AuctionItemId INT PRIMARY KEY IDENTITY,
+    ProductName NVARCHAR(MAX),
+    ProductDescription NVARCHAR(MAX),
+    FileName NVARCHAR(MAX),
+    ProductPriceInterval INT,
+    MinPrice INT,
+    AuctionStartTime DATETIME,
+    AuctionEndTime DATETIME
+);
+
 
 -----------------------------------------------------
+
+3:- bider
+
+CREATE TABLE bider (
+    bider_id INT PRIMARY KEY IDENTITY,
+    uid INT,
+    AuctionItemId INT,
+    amount DECIMAL(10, 2),
+    FOREIGN KEY (uid) REFERENCES tbl_user(uid),
+    FOREIGN KEY (AuctionItemId) REFERENCES AuctionItems(AuctionItemId)
+);
+
+--------------------------------------------------------
+
+4:- tbl_wallet
+
+CREATE TABLE tbl_wallet (
+    wid INT PRIMARY KEY IDENTITY,
+    uid INT,
+    amount DECIMAL(10, 2),
+    block_amount DECIMAL(10, 2),
+    FOREIGN KEY (uid) REFERENCES tbl_user(uid)
+);

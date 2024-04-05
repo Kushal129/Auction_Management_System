@@ -1,20 +1,13 @@
-﻿﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Forgotpass.aspx.cs" Inherits="AMS_6sem.Forgotpass" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/navfooter.Master" AutoEventWireup="true" CodeBehind="Forgotpass.aspx.cs" Inherits="AMS_6sem.Forgotpass1" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+    <a href="index.aspx" class="nav-link">Home<span class="active-underline"></span></a>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-    <link href="Style.css" rel="stylesheet" />
-    <script src="toasterScript.js"></script>
-    <title>AMS | Forgot Password</title>
-</head>
-<body class="bg-purple-100">
+    <a href="logreg.aspx" class="nav-link">Login<span class="active-underline"></span></a>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div class="toaster-alert" id="toaster"></div>
-    <a href="Forgotpass.aspx">Forgotpass.aspx</a>
     <div class="container mx-auto flex justify-center items-center h-screen">
         <form id="mainForm" runat="server" class="max-w-4xl mx-auto flex flex-col md:flex-row animate__animated animate__fadeIn animate__faster border rounded-md bg-white shadow-md p-4">
             <div class="md:w-1/2 p-4">
@@ -30,10 +23,8 @@
                 <p class="mt-4 text-center">Already have an account? <span class="text-[#a43ac0]"><a href="logreg.aspx" id="toggle-login-form">Login here</a></span></p>
             </div>
             <div class="md:w-1/2 p-4 flex justify-center items-center">
-                <img id="form-image" src="img/forgot.svg" class="mt-3 animate__animated animate__fadeInRight" alt="img" />
+                <img id="form-image" src="img/forgot.svg" class="mt-3" alt="img" />
             </div>
         </form>
     </div>
-</body>
-
-</html>
+</asp:Content>

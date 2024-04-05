@@ -10,19 +10,45 @@ namespace User_Side
 {
     public partial class UpdateProfile : System.Web.UI.Page
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-T1A2DI7;Initial Catalog=AMS;Integrated Security=True");
+        SqlConnection con = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True");
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Check if the email is stored in the session
-            if (Session["email"] != null)
+            if (!IsPostBack)
             {
-                string email = Session["email"].ToString();
-                txtEmail.Text = email; // Set email in the textbox if needed
-                // You can also use it wherever you want, for example:
-                // lblEmail.Text = email; // Assuming you have a label named lblEmail
+                    if (Session["UserID"] != null)
+                    {
+                        string userId = Session["UserID"].ToString();
+                        string query = "SELECT * FROM tbl_user WHERE uid = @userId";
+
+                        using (SqlCommand command = new SqlCommand(query, con))
+                        {
+                            command.Parameters.AddWithValue("@userId", userId);
+
+                            con.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+
+                            if (reader.Read())
+                            {
+                                txtName.Text = reader["fullname"].ToString();
+                                txtEmail.Text = reader["email"].ToString();
+                                txtCno.Text = reader["mobile"].ToString();
+                            }
+                            else
+                            {
+                                txtName.Text = "User not found";
+                            }
+
+                            reader.Close();
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/logreg.aspx");
+                    }
+                
             }
-           
         }
+
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {

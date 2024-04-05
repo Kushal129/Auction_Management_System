@@ -10,7 +10,7 @@
         <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
             <table id="AuctionItems" class="display responsive" width="100%">
                 <thead>
-                    <tr class="bg-purple-100">
+                    <tr class="bg-purple-100 text-center">
                         <th class="py-2 px-4 border-b">No</th>
                         <th class="py-2 px-4 border-b">Product Name</th>
                         <th class="py-2 px-4 border-b">Product Description</th>

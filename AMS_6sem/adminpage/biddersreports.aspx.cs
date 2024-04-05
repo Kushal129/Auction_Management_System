@@ -25,7 +25,10 @@ namespace AMS_6sem.adminpage
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM tbl_user", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT bider.amount, tbl_user.fullname, AuctionItems.ProductName " +
+                                                        "FROM bider " +
+                                                        "INNER JOIN tbl_user ON bider.uid = tbl_user.uid " +
+                                                        "INNER JOIN AuctionItems ON bider.AuctionItemId = AuctionItems.AuctionItemId", con))
                 {
                     con.Open();
 
@@ -43,5 +46,6 @@ namespace AMS_6sem.adminpage
                 }
             }
         }
+
     }
 }

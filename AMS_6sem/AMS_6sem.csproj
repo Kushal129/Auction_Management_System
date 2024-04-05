@@ -77,7 +77,6 @@
     <Content Include="adminpage\productdetails.aspx" />
     <Content Include="adminpage\productsreports.aspx" />
     <Content Include="adminpage\winnerreports.aspx" />
-    <Content Include="auctionproduct.aspx" />
     <Content Include="Forgotpass.aspx" />
     <Content Include="img\index_img\home.png" />
     <Content Include="img\index_img\s1.png" />
@@ -88,11 +87,11 @@
     <Content Include="img\index_img\w3.png" />
     <Content Include="img\index_img\w4.png" />
     <Content Include="index.aspx" />
-    <Content Include="logreg.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Registration.aspx" />
     <Content Include="Style.css" />
     <Content Include="toasterScript.js" />
     <Content Include="UpdatePassword.aspx" />
-    <Content Include="user.aspx" />
     <Content Include="userpage\UserIndex.aspx" />
     <Content Include="userpage\UserUpdateProfile.aspx" />
     <Content Include="Web.config" />
@@ -175,13 +174,6 @@
     <Compile Include="adminpage\winnerreports.aspx.designer.cs">
       <DependentUpon>winnerreports.aspx</DependentUpon>
     </Compile>
-    <Compile Include="auctionproduct.aspx.cs">
-      <DependentUpon>auctionproduct.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="auctionproduct.aspx.designer.cs">
-      <DependentUpon>auctionproduct.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Forgotpass.aspx.cs">
       <DependentUpon>Forgotpass.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,27 +188,34 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="logreg.aspx.cs">
-      <DependentUpon>logreg.aspx</DependentUpon>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="logreg.aspx.designer.cs">
-      <DependentUpon>logreg.aspx</DependentUpon>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="navfooter.Master.cs">
+      <DependentUpon>navfooter.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="navfooter.Master.designer.cs">
+      <DependentUpon>navfooter.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration.aspx.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration.aspx.designer.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UpdatePassword.aspx.cs">
       <DependentUpon>UpdatePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UpdatePassword.aspx.designer.cs">
       <DependentUpon>UpdatePassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="user.aspx.cs">
-      <DependentUpon>user.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="user.aspx.designer.cs">
-      <DependentUpon>user.aspx</DependentUpon>
     </Compile>
     <Compile Include="userpage\User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>
@@ -242,6 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.Master" />
+    <Content Include="navfooter.Master" />
     <None Include="packages.config" />
     <Content Include="userpage\User.Master" />
     <None Include="Web.Debug.config">
@@ -253,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Uploads\product_img\" />
+    <Folder Include="Uploads\UserUploadImg\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
