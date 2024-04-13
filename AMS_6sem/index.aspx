@@ -3,11 +3,30 @@
 <%@ Import Namespace="System.Data.SqlClient" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
     <a href="#live-section" class="nav-link">Live Auction<span class="active-underline"></span></a>
     <a href="#upcoming-section" class="nav-link">Upcomming Item's<span class="active-underline"></span></a>
     <%--<a href="#contact-section" class="nav-link">Contact us<span class="active-underline"></span></a>--%>
+    <% if (Session["UserName"] != null && Session["UserID"] != null)
+        { %>
+    <a id="logoutButton" class="nav-link">Logout</a>
+    <% }
+        else
+        { %>
     <a href="Login.aspx" class="nav-link">Login</a>
     <a href="Registration.aspx" class="nav-link">Registration</a>
+    <% } %>
+    <script>
+        document.getElementById("logoutButton").addEventListener("click", function () {
+            logout();
+        });
+
+        function logout() {
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location.href = "Login.aspx";
+        }
+    </script>
 
 </asp:Content>
 

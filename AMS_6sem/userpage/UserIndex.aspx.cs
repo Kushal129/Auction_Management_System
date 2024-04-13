@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -12,53 +13,74 @@ namespace User_Side
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!User.Identity.IsAuthenticated || !User.IsInRole("1") || !IsPostBack)
+
+            if (Session["UserID"] == null && Session["UserName"] == null)
             {
-                if (Session["UserName"] != null && Session["UserId"] != null)
+                Response.Redirect("~/Login.aspx");
+            }
+
+            if (!IsPostBack)
+            {
+                BindAuctionItems();
+            }
+        }
+
+        private void BindAuctionItems()
+        {
+            try
+            {
+                string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
+                DateTime currentTime = DateTime.Now;
+
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    string userEmail = Session["UserName"].ToString();
-                    string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
+                    string query = "SELECT * FROM AuctionItems WHERE AuctionStartTime <= @currentTime AND AuctionEndTime > @currentTime";
 
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        connection.Open();
+                        cmd.Parameters.AddWithValue("@currentTime", currentTime);
 
-                        string query = "SELECT fullname FROM tbl_user WHERE email = @Email";
-
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                         {
-                            command.Parameters.AddWithValue("@Email", userEmail);
-
-                            object result = command.ExecuteScalar();
-
-                            if (result != null)
+                            DataTable dt = new DataTable();
+                            sda.Fill(dt);
+                            if (dt.Rows.Count > 0)
                             {
-                                lblUserName.Text = "Welcome, " + result.ToString();
+                                ListView1.DataSource = dt;
+                                ListView1.DataBind();
                             }
                             else
                             {
-                                lblUserName.Text = "User not found";
+                                errorPlaceholder.InnerHtml = "No live auctions available.";
                             }
                         }
                     }
                 }
-                else
-                {
-                    Response.Redirect("~/logreg.aspx");
-                }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Redirect("~/logreg.aspx");
+                errorPlaceholder.InnerHtml = "An error occurred: " + ex.Message;
             }
         }
 
-        //protected void btnLogout_Click(object sender, EventArgs e)
-        //{
-        //    // Perform logout actions, such as clearing session, redirecting to login page, etc.
-        //    Session.Clear(); // Clear session variables
-        //    Response.Redirect("Userlogin.aspx"); // Redirect to the login page
 
-        //}
+        protected string ResolveImageUrl(object fileName)
+        {
+            return string.Format("~/Uploads/product_img/{0}", fileName);
+        }
+
+        protected void ListView1_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewDetails")
+            {
+                int auctionItemId;
+                if (int.TryParse(e.CommandArgument.ToString(), out auctionItemId))
+                {
+                    Response.Redirect("Product_descripiton.aspx?AuctionItemId=" + auctionItemId);
+                }
+            }
+        }
+
+
     }
 }

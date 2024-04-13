@@ -8,11 +8,6 @@ namespace AMS_6sem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated && User.IsInRole("0"))
-            {
-                   Response.Redirect("~/dashboard.aspx");
-            }
-
             if (!IsPostBack)
             {
                 if (Session["UserName"] != null)
@@ -24,9 +19,17 @@ namespace AMS_6sem
                     {
                         connection.Open();
 
-                        string query = "SELECT fullname FROM tbl_user WHERE email = @Email";
+                        string productQuery = "SELECT COUNT(*) FROM AuctionItems";
+                        SqlCommand productCommand = new SqlCommand(productQuery, connection);
+                        int totalProducts = (int)productCommand.ExecuteScalar();
 
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        string userQuery = "SELECT COUNT(*) FROM tbl_user";
+                        SqlCommand userCommand = new SqlCommand(userQuery, connection);
+                        int totalUsers = (int)userCommand.ExecuteScalar();
+
+                        string userNameQuery = "SELECT fullname FROM tbl_user WHERE email = @Email";
+
+                        using (SqlCommand command = new SqlCommand(userNameQuery, connection))
                         {
                             command.Parameters.AddWithValue("@Email", userEmail);
 
@@ -35,6 +38,8 @@ namespace AMS_6sem
                             if (result != null)
                             {
                                 lblUserName.Text = "Welcome, " + result.ToString();
+                                lblTotalProducts.Text = totalProducts.ToString();
+                                lblTotalUsers.Text = totalUsers.ToString();
                                 ScriptManager.RegisterStartupScript(this, GetType(), "DisableBackButton", "DisableBackButton();", true);
                             }
                             else
@@ -46,12 +51,7 @@ namespace AMS_6sem
                 }
                 else
                 {
-                    Response.Redirect("~/logreg.aspx");
-                }
-
-                if (Session["UserName"] == null)
-                {
-                    Response.Redirect("~/logreg.aspx");
+                    Response.Redirect("~/Login.aspx");
                 }
             }
         }

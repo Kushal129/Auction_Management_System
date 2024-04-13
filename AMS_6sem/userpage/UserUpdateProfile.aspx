@@ -61,7 +61,6 @@
     <div class="container">
         <h2>Update Profile</h2>
         <form id="form1" runat="server">
-
             <label for="txtName">Enter Name:</label>
             <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
         
@@ -71,11 +70,10 @@
             <label for="txtCno">Enter Contact No:</label>
             <asp:TextBox ID="txtCno" runat="server"></asp:TextBox>
         
+            
         
             <asp:Button ID="btnUpdate" runat="server" Text="Update Profile" 
                 onclick="btnUpdate_Click" />
-
-            <a href="UserIndex.aspx" class="text-[#a43ac0]">back to home ?</a>
         </form>
     </div>
 </body>

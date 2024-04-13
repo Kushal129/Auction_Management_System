@@ -13,16 +13,15 @@ namespace User_Side
         {
             if (Session["UserID"] == null && Session["UserName"] == null)
             {
-                Response.Redirect("logreg.aspx");
+                Response.Redirect("~/Login.aspx");
             }
         }
 
-        protected void logout(object sender, EventArgs e)
+        protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Session.RemoveAll();
-            Session.Abandon();
-            Response.Redirect("~/logreg.aspx");
+            Response.Redirect("./Login.aspx");
+
         }
     }
 }

@@ -21,7 +21,7 @@ namespace AMS_6sem.adminpage
                 }
                 else
                 {
-                    Response.Redirect("~/logreg.aspx");
+                    Response.Redirect("~/Login.aspx");
                 }
                 
             }
@@ -60,6 +60,31 @@ namespace AMS_6sem.adminpage
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
             string query = "UPDATE tbl_user SET fullname = @fullname, mobile = @mobile WHERE uid = @uid";
 
+            // Load old data from the database
+            string oldFullName = "";
+            string oldMobile = "";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("SELECT fullname, mobile FROM tbl_user WHERE uid = @uid", connection))
+                {
+                    command.Parameters.AddWithValue("@uid", uid);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        oldFullName = reader["fullname"].ToString();
+                        oldMobile = reader["mobile"].ToString();
+                    }
+                    reader.Close();
+                }
+            }
+
+            if (oldFullName == txtFullName.Text && oldMobile == txtMobileNumber.Text)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('No changes in Profile Update.' , 'blue')", true);
+                return;
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -76,7 +101,6 @@ namespace AMS_6sem.adminpage
                     else
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Failed to update profile.' , 'red')", true);
-
                     }
                 }
             }

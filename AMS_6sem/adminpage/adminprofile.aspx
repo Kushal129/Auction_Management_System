@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Update Profile" Language="C#" MasterPageFile="~/admin.Master" AutoEventWireup="true" CodeBehind="adminprofile.aspx.cs" Inherits="AMS_6sem.adminpage.adminprofile" %>
+﻿<%@ Page Title="AMS | Update Profile Admin" Language="C#" MasterPageFile="~/admin.Master" AutoEventWireup="true" CodeBehind="adminprofile.aspx.cs" Inherits="AMS_6sem.adminpage.adminprofile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>AMS | Update Profile Admin</title>

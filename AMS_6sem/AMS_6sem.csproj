@@ -77,6 +77,7 @@
     <Content Include="adminpage\productdetails.aspx" />
     <Content Include="adminpage\productsreports.aspx" />
     <Content Include="adminpage\winnerreports.aspx" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="Forgotpass.aspx" />
     <Content Include="img\index_img\home.png" />
     <Content Include="img\index_img\s1.png" />
@@ -88,10 +89,14 @@
     <Content Include="img\index_img\w4.png" />
     <Content Include="index.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="PageNotFound.aspx" />
     <Content Include="Registration.aspx" />
+    <Content Include="ServerError.aspx" />
     <Content Include="Style.css" />
     <Content Include="toasterScript.js" />
     <Content Include="UpdatePassword.aspx" />
+    <Content Include="userpage\ContactUs.aspx" />
+    <Content Include="userpage\Product_descripiton.aspx" />
     <Content Include="userpage\UserIndex.aspx" />
     <Content Include="userpage\UserUpdateProfile.aspx" />
     <Content Include="Web.config" />
@@ -174,6 +179,13 @@
     <Compile Include="adminpage\winnerreports.aspx.designer.cs">
       <DependentUpon>winnerreports.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forgotpass.aspx.cs">
       <DependentUpon>Forgotpass.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -202,6 +214,13 @@
     <Compile Include="navfooter.Master.designer.cs">
       <DependentUpon>navfooter.Master</DependentUpon>
     </Compile>
+    <Compile Include="PageNotFound.aspx.cs">
+      <DependentUpon>PageNotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageNotFound.aspx.designer.cs">
+      <DependentUpon>PageNotFound.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
@@ -210,12 +229,33 @@
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ServerError.aspx.cs">
+      <DependentUpon>ServerError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ServerError.aspx.designer.cs">
+      <DependentUpon>ServerError.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UpdatePassword.aspx.cs">
       <DependentUpon>UpdatePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UpdatePassword.aspx.designer.cs">
       <DependentUpon>UpdatePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userpage\ContactUs.aspx.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userpage\ContactUs.aspx.designer.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userpage\Product_descripiton.aspx.cs">
+      <DependentUpon>Product_descripiton.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userpage\Product_descripiton.aspx.designer.cs">
+      <DependentUpon>Product_descripiton.aspx</DependentUpon>
     </Compile>
     <Compile Include="userpage\User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>

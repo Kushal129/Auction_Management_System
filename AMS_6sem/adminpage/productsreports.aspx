@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin.Master" AutoEventWireup="true" CodeBehind="productsreports.aspx.cs" Inherits="AMS_6sem.adminpage.productsreports" %>
+﻿<%@ Page Title="AMS | Auction Product's Report" Language="C#" MasterPageFile="~/admin.Master" AutoEventWireup="true" CodeBehind="productsreports.aspx.cs" Inherits="AMS_6sem.adminpage.productsreports" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>AMS | Auction Product's Report</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="toaster-alert" id="toaster"></div>
@@ -100,6 +99,7 @@
                 }
             });
         });
+
     </script>
 
 </asp:Content>

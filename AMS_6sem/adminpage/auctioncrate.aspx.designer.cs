@@ -69,6 +69,33 @@ namespace AMS_6sem.adminpage
         protected global::System.Web.UI.WebControls.FileUpload file_input;
 
         /// <summary>
+        /// RequiredFieldValidator8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+
+        /// <summary>
+        /// CustomValidatorFileType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorFileType;
+
+        /// <summary>
+        /// CustomValidatorFileSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorFileSize;
+
+        /// <summary>
         /// productPriceInterval control.
         /// </summary>
         /// <remarks>

@@ -11,7 +11,6 @@ namespace AMS_6sem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
+        }       
     }
 }

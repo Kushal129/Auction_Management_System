@@ -159,6 +159,15 @@ namespace AMS_6sem
         protected global::System.Web.UI.WebControls.CustomValidator cvFileUserImageSize;
 
         /// <summary>
+        /// cvFileUserImageType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFileUserImageType;
+
+        /// <summary>
         /// Password_R control.
         /// </summary>
         /// <remarks>

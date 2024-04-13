@@ -1,4 +1,0 @@
-C:\MSCIT\STUDY\SEM_6\ASP\User_Side\User_Side\bin\User_Side.dll
-C:\MSCIT\STUDY\SEM_6\ASP\User_Side\User_Side\bin\User_Side.pdb
-C:\MSCIT\STUDY\SEM_6\ASP\User_Side\User_Side\obj\Debug\User_Side.dll
-C:\MSCIT\STUDY\SEM_6\ASP\User_Side\User_Side\obj\Debug\User_Side.pdb

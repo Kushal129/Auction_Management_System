@@ -25,7 +25,6 @@ namespace AMS_6sem.adminpage
         {
             try
             {
-
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     string query = "SELECT * FROM AuctionItems";
@@ -38,8 +37,6 @@ namespace AMS_6sem.adminpage
                         {
                             adapter.Fill(dt);
                         }
-
-                        Console.WriteLine($"Number of rows fetched: {dt.Rows.Count}");
 
                         AuctionItemsDataTable.DataSource = dt;
                         AuctionItemsDataTable.DataBind();
@@ -72,14 +69,12 @@ namespace AMS_6sem.adminpage
 
                         if (rowsAffected > 0)
                         {
-                           
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Record deleted successfully.' , 'green')", true);
-                            Response.Redirect(Request.RawUrl);
-
                             FetchAuctionItems();
                         }
                         else
                         {
+                            FetchAuctionItems();
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Record not found or already deleted.' , 'yellow')", true);
                         }
                     }
@@ -91,6 +86,7 @@ namespace AMS_6sem.adminpage
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", $"alert('{errorMessage}')", true);
             }
         }
+
 
         protected string GetAuctionStatus(DateTime startTime, DateTime endTime)
         {
@@ -115,7 +111,7 @@ namespace AMS_6sem.adminpage
             DateTime endTimeValue = Convert.ToDateTime(endTime);
             DateTime currentTime = DateTime.Now;
 
-            if (currentTime < endTimeValue)
+            if (currentTime < startTimeValue && currentTime < endTimeValue)
             {
                 return "display: inline-block;"; 
             }

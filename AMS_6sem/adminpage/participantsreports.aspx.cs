@@ -13,6 +13,7 @@ namespace AMS_6sem.adminpage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 BindUserData();

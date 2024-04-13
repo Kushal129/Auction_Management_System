@@ -20,7 +20,6 @@
                     <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Invalid email format." ValidationExpression="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" CssClass="text-red-500" />
                 </div>
                 <asp:Button ID="btnSubmit" runat="server" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-blue-300" Text="Submit" OnClick="btnSubmit_Click" />
-                <p class="mt-4 text-center">Already have an account? <span class="text-[#a43ac0]"><a href="logreg.aspx" id="toggle-login-form">Login here</a></span></p>
             </div>
             <div class="md:w-1/2 p-4 flex justify-center items-center">
                 <img id="form-image" src="img/forgot.svg" class="mt-3" alt="img" />

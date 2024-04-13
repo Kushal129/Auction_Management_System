@@ -7,10 +7,17 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="toaster-alert" id="toaster"></div>
-    <p>Aama all users hase je Client side thi bid marvana hase ne avaya hase ee data hase </p>
+    <%--<p>Aama all users hase je Client side thi bid marvana hase ne avaya hase ee data hase </p>--%>
     <form runat="server">
         <section class="container mx-auto mt-5" id="user-section">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black lg:grid-cols-4 gap-4">
+                <%--<div class="mb-4">
+                    <label for="txtSearch" class="block text-sm font-medium text-gray-700">Search by User ID:</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="text" id="txtSearch" runat="server" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Enter User ID">
+                        <button type="button" class="absolute inset-y-0 right-0 px-4 py-1 text-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700" onclick="searchUser()">Search</button>
+                    </div>
+                </div>--%>
                 <asp:Repeater ID="UserRepeater" runat="server">
                     <ItemTemplate>
                         <div class="bg-white p-4 rounded-lg shadow-md transition duration-300 transform hover:shadow-lg hover:bg-purple-100 hover:scale-105">
@@ -47,6 +54,12 @@
                 </asp:Repeater>
             </div>
         </section>
+        <%--<script>
+            function searchUser() {
+                var userID = document.getElementById('<%= txtSearch.ClientID %>').value;
+                window.location.href = 'participantsreports.aspx?userID=' + userID;
+            }
+        </script>--%>
 
         <script>
             $(document).ready(function () {

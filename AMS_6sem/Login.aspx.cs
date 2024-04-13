@@ -19,8 +19,6 @@ namespace AMS_6sem
             
         }
 
-        
-
         private bool VerifyPassword(string password, string hashedPasswordFromDb)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -94,7 +92,7 @@ namespace AMS_6sem
                                 }
                                 else
                                 {
-                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Email does not exist.' , 'red')", true);
+                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Incorrect password.' , 'red')", true);
                                 }
                             }
                             else

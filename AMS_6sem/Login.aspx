@@ -16,8 +16,9 @@
     <a href="Registration.aspx" class="nav-link">Registration<span class="active-underline"></span></a>
 </asp:Content>
 
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-<div class="toaster-alert" id="toaster"></div>
+    <div class="toaster-alert" id="toaster"></div>
     <div class="container mx-auto flex justify-center items-center h-screen">
         <form id="LoginFormUser" runat="server" class="max-w-4xl mx-auto flex animate__animated animate__fadeIn animate__faster border rounded-md bg-white shadow-md">
             <div class="w-full md:w-1/2 p-8 bg-purple-100">
@@ -30,21 +31,21 @@
                         <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="RegisterGroup"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Enter a valid email address." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="text-red-500" Display="Dynamic" ValidationGroup="RegisterGroup"></asp:RegularExpressionValidator>
                     </div>
-
                     <div class="mb-4">
                         <label for="txtPassword" class="block text-sm font-medium text-gray-600">Password:</label>
                         <div class="relative">
-                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="mt-1 p-2 w-full border rounded-md" placeholder="Enter your password"></asp:TextBox>
+                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="txtPassword mt-1 p-2 w-full border rounded-md" placeholder="Enter your password"></asp:TextBox>
                             <span class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                <img onclick="togglePassword('txtPassword', 'eyeIcon', 'eyeSlashIcon')" class="eyeIcon h-5 w-5 text-gray-400 cursor-pointer" src="img/showp.png" alt="Toggle Password" />
-                                <img style="display: none;" class="eyeSlashIcon h-5 w-5 text-gray-400 cursor-pointer" src="img/hidep.png" alt="Toggle Password" />
+                                <img class="eyeOpen h-5 w-5 text-gray-400 cursor-pointer" src="img/showp.png" alt="Show Password" />
+                                <img style="display: none;" class="eyeClose h-5 w-5 text-gray-400 cursor-pointer" src="img/hidep.png" alt="Hide Password" />
                             </span>
                         </div>
                         <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword" ErrorMessage="Password is required." CssClass="text-red-500" Display="Dynamic" ValidationGroup="RegisterGroup"></asp:RequiredFieldValidator>
                     </div>
 
-                    <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105  hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" ValidationGroup="RegisterGroup"  OnClick="btnLogin_Click"  />
-                    
+
+                    <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="w-full bg-black text-white py-3 px-6 rounded-md transition duration-300 transform hover:scale-105  hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" ValidationGroup="RegisterGroup" OnClick="btnLogin_Click" />
+
                     <p class="mt-2 text-center"><span class="text-[#a43ac0]"><a href="Forgotpass.aspx" id="toggle-reset-password-form">forgot Password?</a></span></p>
                 </div>
             </div>
@@ -54,27 +55,44 @@
             </div>
         </form>
     </div>
+     
 
     <script>
-        function togglePassword(inputId, eyeIconClass, eyeSlashIconClass) {
-            var passwordInput = document.getElementById(inputId);
-            var eyeIcon = document.querySelector("." + eyeIconClass);
-            var eyeSlashIcon = document.querySelector("." + eyeSlashIconClass);
+        document.addEventListener("DOMContentLoaded", function () {
+            function togglePasswordVisibility() {
+                var passwordInput = document.getElementById("<%= txtPassword.ClientID %>");
+                var eyeOpenIcon = document.querySelector(".eyeOpen");
+                var eyeCloseIcon = document.querySelector(".eyeClose");
 
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.style.display = "none";
-                eyeSlashIcon.style.display = "inline";
-                setTimeout(function () {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    eyeOpenIcon.style.display = "none";
+                    eyeCloseIcon.style.display = "block";
+                } else {
                     passwordInput.type = "password";
-                    eyeIcon.style.display = "inline";
-                    eyeSlashIcon.style.display = "none";
-                }, 2000);
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.style.display = "inline";
-                eyeSlashIcon.style.display = "none";
+                    eyeOpenIcon.style.display = "block";
+                    eyeCloseIcon.style.display = "none";
+                }
             }
-        }
+
+            var eyeOpenIcon = document.querySelector(".eyeOpen");
+            var eyeCloseIcon = document.querySelector(".eyeClose");
+
+            if (eyeOpenIcon && eyeCloseIcon) {
+                eyeOpenIcon.addEventListener("click", togglePasswordVisibility);
+                eyeCloseIcon.addEventListener("click", togglePasswordVisibility);
+            } else {
+                console.error("Eye nathi dekhatiiiii j ");
+            }
+        });
     </script>
+     <script type="text/javascript">
+         function preventBack() {
+             window.history.forward();
+         }
+         setTimeout("preventBack()", 0);
+         window.onunload = function () { null };
+     </script>
+
+
 </asp:Content>

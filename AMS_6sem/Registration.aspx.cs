@@ -83,26 +83,6 @@ namespace AMS_6sem
             Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", $"showToaster('{message}', 'green'); setTimeout(function(){{ window.location.href = 'Login.aspx'; }}, 2000);", true);
         }
 
-        protected void ValidateUserImageSize(object source, ServerValidateEventArgs args)
-        {
-            if (fileUserImage.HasFile)
-            {
-                double fileSizeKB = fileUserImage.PostedFile.ContentLength / 1024.0;
-
-                if (fileSizeKB < 100)
-                {
-                    args.IsValid = false;
-                }
-                else
-                {
-                    args.IsValid = true;
-                }
-            }
-            else
-            {
-                args.IsValid = false;
-            }
-        }
 
         private string SaveUserImage(HttpPostedFile file)
         {
@@ -192,5 +172,49 @@ namespace AMS_6sem
             Email_R.Text = string.Empty;
             Password_R.Text = string.Empty;
         }
+        protected void ValidateUserImageSize(object source, ServerValidateEventArgs args)
+        {
+            if (fileUserImage.HasFile)
+            {
+                double fileSizeKB = fileUserImage.PostedFile.ContentLength / 1024.0;
+
+                if (fileSizeKB < 100 || fileSizeKB > 200)
+                {
+                    args.IsValid = false;
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
+
+        protected void ValidateUserImageType(object source, ServerValidateEventArgs args)
+        {
+            if (fileUserImage.HasFile)
+            {
+                string[] allowedFileTypes = { "image/jpeg", "image/jpg", "image/png" };
+                string fileType = fileUserImage.PostedFile.ContentType;
+
+                if (!allowedFileTypes.Contains(fileType))
+                {
+                    args.IsValid = false;
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
+
+
     }
 }
