@@ -4,7 +4,7 @@
 
     <a href="index.aspx" class="nav-link">Home<span class="active-underline"></span></a>
 
-    <a href="logreg.aspx" class="nav-link">Login<span class="active-underline"></span></a>
+    <a href="Login.aspx" class="nav-link">Login<span class="active-underline"></span></a>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <div class="toaster-alert" id="toaster"></div>

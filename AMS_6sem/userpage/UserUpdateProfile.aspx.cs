@@ -5,38 +5,84 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace User_Side
 {
     public partial class UpdateProfile : System.Web.UI.Page
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-T1A2DI7;Initial Catalog=AMS;Integrated Security=True");
+        SqlConnection con = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True");
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["UserID"] == null && Session["UserName"] == null)
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
+                else
+                {
+                    string userEmail = Session["UserName"].ToString();
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT fullname, mobile, user_img FROM tbl_user WHERE email = @Email", con);
+                    cmd.Parameters.AddWithValue("@Email", userEmail);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        txtName.Text = reader["fullname"].ToString().Trim();
+                        txtCno.Text = reader["mobile"].ToString().Trim();
+                        txtEmail.Text = userEmail;
 
-            if (Session["UserID"] == null && Session["UserName"] == null)
-            {
-                Response.Redirect("~/Login.aspx");
+                        string imagePath = reader["user_img"].ToString().Trim();
+                        imgProfile.ImageUrl = ResolveUrl("~/Uploads/UserUploadImg/" + imagePath);
+                    }
+                    reader.Close();
+                    con.Close();
+                }
             }
-            // Check if the email is stored in the session
-            if (Session["email"] != null)
-            {
-                string email = Session["email"].ToString();
-                txtEmail.Text = email; // Set email in the textbox if needed
-                // You can also use it wherever you want, for example:
-                // lblEmail.Text = email; // Assuming you have a label named lblEmail
-            }
-           
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+            string imagePath = SaveUserImage(FileUploadControl.PostedFile);
 
             con.Open();
-            SqlCommand cmd = new SqlCommand("update tbl_user set fullname='" + txtName.Text + "' , mobile = '" + txtCno.Text + "'  where email = '" + txtEmail.Text + "';", con);
+            SqlCommand cmd = new SqlCommand("UPDATE tbl_user SET fullname = @FullName, mobile = @Mobile, user_img = @ImagePath WHERE email = @Email", con);
+            cmd.Parameters.AddWithValue("@FullName", txtName.Text);
+            cmd.Parameters.AddWithValue("@Mobile", txtCno.Text);
+            cmd.Parameters.AddWithValue("@ImagePath", imagePath);
+            cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
             cmd.ExecuteNonQuery();
             con.Close();
 
+            ScriptManager.RegisterStartupScript(this, GetType(), "updateSuccess", "alert('Profile updated successfully!');", true);
         }
+
+        private string SaveUserImage(HttpPostedFile file)
+        {
+            string userImgPath = "";
+
+            if (file != null && file.ContentLength > 0 && IsImageValid(file))
+            {
+                string fileName = Path.GetFileName(file.FileName);
+                string userImgFolderPath = Server.MapPath("/Uploads/UserUploadImg/");
+
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(fileName);
+                string filePath = Path.Combine(userImgFolderPath, uniqueFileName);
+
+                file.SaveAs(filePath);
+                userImgPath = uniqueFileName;
+            }
+
+            return userImgPath;
+        }
+
+        private bool IsImageValid(HttpPostedFile file)
+        {
+            string fileExtension = Path.GetExtension(file.FileName).ToLower();
+            return (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png");
+            return true;
+        }
+
     }
 }

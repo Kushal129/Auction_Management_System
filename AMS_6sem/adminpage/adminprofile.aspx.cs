@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -18,6 +20,7 @@ namespace AMS_6sem.adminpage
                 if (Session["UserName"] != null && Session["UserID"] != null)
                 {
                     LoadUserData();
+                    // rbChangePassword_SelectedIndexChanged(sender, e); // method ofr to handle initial visibility
                 }
                 else
                 {
@@ -27,7 +30,19 @@ namespace AMS_6sem.adminpage
             }
         }
 
-      
+        protected void rbChangePassword_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbChangePassword.SelectedValue == "Yes")
+            {
+                passwordFields.Style["display"] = "block";
+            }
+            else
+            {
+                passwordFields.Style["display"] = "none";
+            }
+        }
+
+
         protected void LoadUserData()
         {
             int uid = Convert.ToInt32(Session["UserID"]);
@@ -44,8 +59,8 @@ namespace AMS_6sem.adminpage
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        txtFullName.Text = reader["fullname"].ToString();
-                        txtMobileNumber.Text = reader["mobile"].ToString();
+                        txtFullName.Text = reader["fullname"].ToString().Trim();
+                        txtMobileNumber.Text = reader["mobile"].ToString().Trim();
                         userEmail.InnerText = reader["email"].ToString();
                     }
                     reader.Close();
@@ -53,37 +68,44 @@ namespace AMS_6sem.adminpage
             }
         }
 
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
 
         protected void updateButton_Click(object sender, EventArgs e)
         {
             int uid = Convert.ToInt32(Session["UserID"]);
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
-            string query = "UPDATE tbl_user SET fullname = @fullname, mobile = @mobile WHERE uid = @uid";
+            string query = "UPDATE tbl_user SET fullname = @fullname, mobile = @mobile";
 
-            // Load old data from the database
-            string oldFullName = "";
-            string oldMobile = "";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Declare hashedPassword variable outside of the if block
+            string hashedPassword = null;
+
+            if (rbChangePassword.SelectedValue == "Yes")
             {
-                using (SqlCommand command = new SqlCommand("SELECT fullname, mobile FROM tbl_user WHERE uid = @uid", connection))
+                if (txtPassword.Text != txtConfirmPassword.Text)
                 {
-                    command.Parameters.AddWithValue("@uid", uid);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        oldFullName = reader["fullname"].ToString();
-                        oldMobile = reader["mobile"].ToString();
-                    }
-                    reader.Close();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Passwords do not match.' , 'red')", true);
+                    return;
                 }
+
+                hashedPassword = HashPassword(txtPassword.Text);
+
+                query += ", password = @password";
             }
 
-            if (oldFullName == txtFullName.Text && oldMobile == txtMobileNumber.Text)
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('No changes in Profile Update.' , 'blue')", true);
-                return;
-            }
+            query += " WHERE uid = @uid";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -91,7 +113,14 @@ namespace AMS_6sem.adminpage
                 {
                     command.Parameters.AddWithValue("@fullname", txtFullName.Text);
                     command.Parameters.AddWithValue("@mobile", txtMobileNumber.Text);
+
+                    if (rbChangePassword.SelectedValue == "Yes")
+                    {
+                        command.Parameters.AddWithValue("@password", hashedPassword);
+                    }
+
                     command.Parameters.AddWithValue("@uid", uid);
+
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)

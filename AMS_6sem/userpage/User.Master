@@ -110,7 +110,7 @@
                     </div>
                     <div class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:space-x-4" id="nav-links">
                         <a href="UserIndex.aspx" class="nav-link">Live Auction<span class="active-underline"></span></a>
-                        <%--<a href="" class="nav-link">Upcomming Item's<span class="active-underline"></span></a>--%>
+                        <a href="UserUpdateProfile.aspx" class="nav-link">Profile<span class="active-underline"></span></a>
                         <a href="./ContactUs.aspx" class="nav-link">Contact us<span class="active-underline"></span></a>
                         <a href="../Login.aspx" class="nav-link" onclick="btnLogout_Click">Logout</a>
                     </div>
@@ -118,7 +118,7 @@
             </nav>
         </div>
 
-        <!-- Other sections and content -->
+        
         <div class="content-placeholder">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

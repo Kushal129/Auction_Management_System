@@ -40,7 +40,7 @@
                 </div>
                 <span id="passwordStrength" class="text-sm"></span>
                 <asp:Button ID="btnSubmit" runat="server" CssClass="w-full bg-black text-white py-2 px-4 rounded-md transition duration-300 transform hover:scale-105 hover:bg-[#3e004f] focus:outline-none focus:ring focus:border-purple-300" Text="Update Password" OnClick="btnUpdate_Click" />
-
+                 <p class="mt-2 text-center"><span class="text-[#a43ac0]"><a href="index.aspx" id="toggle-reset-password-form">back to home page?</a></span></p>
             </div>
             <div class="md:w-1/2 p-4 flex justify-center items-center">
                 <img id="form-image" src="img/updatepass.svg" class="mt-3 animate__animated animate__fadeInRight" alt="img" />

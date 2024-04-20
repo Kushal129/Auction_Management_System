@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 
@@ -14,8 +12,15 @@ namespace User_Side
             {
                 if (Request.QueryString["AuctionItemId"] != null)
                 {
-                    int auctionItemId = Convert.ToInt32(Request.QueryString["AuctionItemId"]);
-                    LoadProductDetails(auctionItemId);
+                    int auctionItemId;
+                    if (int.TryParse(Request.QueryString["AuctionItemId"], out auctionItemId))
+                    {
+                        LoadProductDetails(auctionItemId);
+                    }
+                    else
+                    {
+                        Response.Redirect("./UserIndex.aspx");
+                    }
                 }
                 else
                 {
@@ -41,14 +46,14 @@ namespace User_Side
 
                     if (productReader.Read())
                     {
-                        lblProductName.Text = "Product Name: " + productReader["ProductName"].ToString();
-                        lblProductDescription.Text = "Description: " + productReader["ProductDescription"].ToString();
-                        lblProductPriceInterval.Text = "Price Interval: " + productReader["ProductPriceInterval"].ToString();
-                        lblMinPrice.Text = "Minimum Price: " + productReader["MinPrice"].ToString();
-                        lblAuctionStartTime.Text = "Auction Start Time: " + productReader["AuctionStartTime"].ToString();
-                        lblAuctionEndTime.Text = "Auction End Time: " + productReader["AuctionEndTime"].ToString();
+                        lblProductName.Text = "Product Name: " + productReader["ProductName"];
+                        lblProductDescription.Text = "Description: " + productReader["ProductDescription"];
+                        lblProductPriceInterval.Text = "Price Interval: " + productReader["ProductPriceInterval"];
+                        lblMinPrice.Text = "Minimum Price: " + productReader["MinPrice"];
+                        lblAuctionStartTime.Text = "Auction Start Time: " + productReader["AuctionStartTime"];
+                        lblAuctionEndTime.Text = "Auction End Time: " + productReader["AuctionEndTime"];
 
-                        string imageUrl = "~/Uploads/product_img/" + productReader["FileName"].ToString();
+                        string imageUrl = "~/Uploads/product_img/" + productReader["FileName"];
                         imgProduct.ImageUrl = imageUrl;
                     }
 
@@ -63,7 +68,7 @@ namespace User_Side
                     if (highestBidObj != null && highestBidObj != DBNull.Value)
                     {
                         decimal latestBidAmount = Convert.ToDecimal(highestBidObj);
-                        lblLatestBidAmount.Text = "Latest Bid Amount: $" + latestBidAmount.ToString();
+                        lblLatestBidAmount.Text = "Latest Bid Amount: $" + latestBidAmount;
                     }
                     else
                     {
@@ -73,39 +78,35 @@ namespace User_Side
             }
         }
 
-
         protected void btnPlaceBid_Click(object sender, EventArgs e)
         {
             if (Request.QueryString["AuctionItemId"] != null)
             {
-                int auctionItemId = Convert.ToInt32(Request.QueryString["AuctionItemId"]);
-                decimal bidAmount;
-                if (decimal.TryParse(txtBidAmount.Text, out bidAmount))
+                int auctionItemId;
+                if (int.TryParse(Request.QueryString["AuctionItemId"], out auctionItemId))
                 {
-                    // Get the latest bid amount
-                    decimal latestBidAmount = GetLatestBidAmount(auctionItemId);
-
-                    // Validate bid amount
-                    if (bidAmount <= latestBidAmount)
+                    decimal bidAmount;
+                    if (decimal.TryParse(txtBidAmount.Text, out bidAmount))
                     {
-                        // Show error message
-                        lblMessage.Text = "Bid amount must be higher than the latest bid amount.";
+                        decimal latestBidAmount = GetLatestBidAmount(auctionItemId);
+
+                        if (bidAmount <= latestBidAmount)
+                        {
+                            lblMessage.Text = "Bid amount must be higher than the latest bid amount.";
+                        }
+                        else
+                        {
+                            int userId = 1; 
+                            PlaceBid(userId, auctionItemId, bidAmount);
+
+                            lblLatestBidAmount.Text = "Latest Bid Amount: $" + bidAmount;
+                            lblSusc.Text = "Bid placed successfully.";
+                        }
                     }
                     else
                     {
-                        // Place the bid
-                        int userId = 1; // Example user ID, replace with actual user ID retrieval logic
-                        PlaceBid(userId, auctionItemId, bidAmount);
-
-                        // Refresh latest bid amount
-                        lblLatestBidAmount.Text = "Latest Bid Amount: $" + bidAmount.ToString();
-                        lblMessage.Text = "Bid placed successfully.";
+                        lblMessage.Text = "Invalid bid amount.";
                     }
-                }
-                else
-                {
-                    // Show error message
-                    lblMessage.Text = "Invalid bid amount.";
                 }
             }
         }
@@ -132,10 +133,8 @@ namespace User_Side
             return 0;
         }
 
-
         private void PlaceBid(int userId, int auctionItemId, decimal bidAmount)
         {
-          
             string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
             string query = "INSERT INTO bider (uid, AuctionItemId, amount) VALUES (@uid, @auctionItemId, @bidAmount)";
             using (SqlConnection con = new SqlConnection(connectionString))

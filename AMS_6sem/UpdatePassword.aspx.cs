@@ -62,8 +62,6 @@ namespace AMS_6sem
                         {
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "toasterScript", "showToaster('Password updated successfully.' , 'green')", true);
                             txtNewPassword.Text = "";
-                            Response.Redirect("~/logreg.aspx");
-   
                         }
                         else
                         {

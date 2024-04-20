@@ -99,7 +99,7 @@ namespace AMS_6sem
                     string filePath = Path.Combine(userImgFolderPath, uniqueFileName);
 
                     file.SaveAs(filePath);
-                    userImgPath = "/Uploads/UserUploadImg/" + uniqueFileName;
+                    userImgPath = uniqueFileName;
                 }
             }
 

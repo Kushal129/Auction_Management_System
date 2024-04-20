@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace User_Side {
-    
-    
-    public partial class UpdateProfile {
-        
+namespace User_Side
+{
+
+
+    public partial class UpdateProfile
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,25 @@ namespace User_Side {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
+        /// <summary>
+        /// imgProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgProfile;
+
+        /// <summary>
+        /// FileUploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
+
         /// <summary>
         /// txtName control.
         /// </summary>
@@ -29,7 +49,7 @@ namespace User_Side {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtName;
-        
+
         /// <summary>
         /// txtEmail control.
         /// </summary>
@@ -38,7 +58,7 @@ namespace User_Side {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        
+
         /// <summary>
         /// txtCno control.
         /// </summary>
@@ -47,7 +67,7 @@ namespace User_Side {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCno;
-        
+
         /// <summary>
         /// btnUpdate control.
         /// </summary>
