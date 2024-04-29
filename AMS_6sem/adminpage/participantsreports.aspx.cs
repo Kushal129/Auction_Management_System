@@ -25,7 +25,7 @@ namespace AMS_6sem.adminpage
         {
             using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS;Initial Catalog=AMS;Integrated Security=True"))
             {
-                string query = "SELECT * FROM tbl_user WHERE role <> '0'";
+                string query = "SELECT uid, fullname, email, mobile, CONCAT('/Uploads/UserUploadImg/', user_img) AS user_img FROM tbl_user WHERE role <> '0'";
                 SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -42,6 +42,7 @@ namespace AMS_6sem.adminpage
 
             UpdateUserRole(customerId, isChecked);
         }
+
 
         private void UpdateUserRole(int customerId, bool isChecked)
         {

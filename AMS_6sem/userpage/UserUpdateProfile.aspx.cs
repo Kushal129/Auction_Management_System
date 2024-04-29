@@ -64,24 +64,24 @@ namespace User_Side
 
             if (file != null && file.ContentLength > 0 && IsImageValid(file))
             {
+                string fileExtension = Path.GetExtension(file.FileName).ToLower();
                 string fileName = Path.GetFileName(file.FileName);
-                string userImgFolderPath = Server.MapPath("/Uploads/UserUploadImg/");
-
-                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(fileName);
-                string filePath = Path.Combine(userImgFolderPath, uniqueFileName);
+                string userImgFolderPath = Server.MapPath("~/Uploads/UserUploadImg/");
+                string filePath = Path.Combine(userImgFolderPath, fileName); 
 
                 file.SaveAs(filePath);
-                userImgPath = uniqueFileName;
+                userImgPath = fileName; 
             }
 
             return userImgPath;
         }
 
+
+
         private bool IsImageValid(HttpPostedFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName).ToLower();
             return (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png");
-            return true;
         }
 
     }
