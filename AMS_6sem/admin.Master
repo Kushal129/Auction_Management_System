@@ -110,7 +110,7 @@
         function logout() {
             sessionStorage.clear();
             localStorage.clear();
-            window.location.href = "Login.aspx";
+            window.location.href = "../Login.aspx";
         }
     </script>
 </body>

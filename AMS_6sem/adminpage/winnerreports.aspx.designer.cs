@@ -15,12 +15,12 @@ namespace AMS_6sem.adminpage
     {
 
         /// <summary>
-        /// tblform control.
+        /// WinnerreportDataTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm tblform;
+        protected global::System.Web.UI.WebControls.Repeater WinnerreportDataTable;
     }
 }

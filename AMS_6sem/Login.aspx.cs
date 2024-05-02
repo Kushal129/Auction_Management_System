@@ -57,7 +57,7 @@ namespace AMS_6sem
                 {
                     connection.Open();
 
-                    string qry = "SELECT uid, password, role FROM tbl_user WHERE email = @username";
+                    string qry = "SELECT * FROM tbl_user WHERE email = @username";
 
                     using (SqlCommand emailCheckCommand = new SqlCommand(qry, connection))
                     {

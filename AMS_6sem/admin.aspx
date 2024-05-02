@@ -23,7 +23,7 @@
 
                 <div class="bg-purple-200 p-6 rounded-md shadow-md">
                     <h3 class="text-xl font-semibold mb-2">Total Revenue</h3>
-                    <p class="text-3xl font-bold">₹50,000</p>
+                    <asp:Label ID="lblAmount" runat="server" CssClass="text-3xl font-bold"></asp:Label>
                 </div>
             </div>
         </div>

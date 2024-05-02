@@ -15,7 +15,14 @@ namespace AMS_6sem.adminpage
         {
             if (!IsPostBack)
             {
-                BindUserData();
+                try
+                {
+                    BindUserData();
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessageLabel.Text = "An error occurred while loading data: " + ex.Message;
+                }
             }
 
         }
@@ -25,7 +32,7 @@ namespace AMS_6sem.adminpage
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT bider.amount, tbl_user.fullname, AuctionItems.ProductName " +
+                using (SqlCommand cmd = new SqlCommand("SELECT bider.bider_id,bider.amount, tbl_user.fullname, AuctionItems.ProductName " +
                                                         "FROM bider " +
                                                         "INNER JOIN tbl_user ON bider.uid = tbl_user.uid " +
                                                         "INNER JOIN AuctionItems ON bider.AuctionItemId = AuctionItems.AuctionItemId", con))
@@ -42,10 +49,42 @@ namespace AMS_6sem.adminpage
                             BidderRecordTable.DataSource = dt;
                             BidderRecordTable.DataBind();
                         }
+                        else
+                        {
+                            ErrorMessageLabel.Text = "No data available.";
+                        }
                     }
                 }
             }
         }
+
+        protected void BidderRecordTable_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteRecord")
+            {
+                int biderId = Convert.ToInt32(e.CommandArgument);
+
+                DeleteRecord(biderId);
+
+                BindUserData();
+            }
+        }
+
+        private void DeleteRecord(int biderId)
+        {
+            string connectionString = "Data Source=LAPTOP-PQJ1JGEE\\SQLEXPRESS; Initial Catalog=AMS; Integrated Security=True";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM bider WHERE bider_id = @biderId", con))
+                {
+                    cmd.Parameters.AddWithValue("@biderId", biderId);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
     }
 }

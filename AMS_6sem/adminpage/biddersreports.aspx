@@ -5,36 +5,38 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 class="text-4xl text-center font-semibold mb-6">Bidders Reports</h1>
-    <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
-        <table id="Bidderstable" class="display responsive" width="100%">
-            <thead>
-                <tr class="text-center bg-purple-100">
-                    <th class="py-2 px-4 border-b">No</th>
-                    <th class="py-2 px-4 border-b">Bidder Name</th>
-                    <th class="py-2 px-4 border-b">Item Name</th>
-                    <th class="py-2 px-4 border-b">Bid Amount</th>
-                    <th class="py-2 px-4 border-b">Action</th>
-                </tr>
-            </thead>
-            <tbody class="text-center">
-                <asp:Repeater ID="BidderRecordTable" runat="server">
-                    <ItemTemplate>
-                        <tr class="bg-purple-300 hover:bg-purple-100 text-center transition-all">
-                            <td class="py-2 px-4 border-b"><%# Container.ItemIndex + 1 %></td>
-                            <td class="py-2 px-4 border-b"><%# Eval("fullname") %></td>
-                            <td class="py-2 px-4 border-b"><%# Eval("ProductName") %></td>
-                            <td class="py-2 px-4 border-b"><%# Eval("amount") %></td>
-                            <td class="py-2 px-4 border-b">
-                                <button id="deleteButton">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </tbody>
-        </table>
-    </div>
+    <form runat="server" id="biderfrom">
+        <div class="bg-purple-200 border border-gray-200 rounded shadow p-6">
+            <table id="Bidderstable" class="display responsive" width="100%">
+                <thead>
+                    <tr class="text-center bg-purple-100">
+                        <th class="py-2 px-4 border-b">No</th>
+                        <th class="py-2 px-4 border-b">Bidder Name</th>
+                        <th class="py-2 px-4 border-b">Item Name</th>
+                        <th class="py-2 px-4 border-b">Bid Amount</th>
+                        <th class="py-2 px-4 border-b">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <asp:Repeater ID="BidderRecordTable" runat="server" OnItemCommand="BidderRecordTable_ItemCommand">
+                        <ItemTemplate>
+                            <tr class="bg-purple-300 hover:bg-purple-100 text-center transition-all">
+                                <td class="py-2 px-4 border-b"><%# Container.ItemIndex + 1 %></td>
+                                <td class="py-2 px-4 border-b"><%# Eval("fullname") %></td>
+                                <td class="py-2 px-4 border-b"><%# Eval("ProductName") %></td>
+                                <td class="py-2 px-4 border-b"><%# Eval("amount") %></td>
+                                <td class="py-2 px-4 border-b">
+                                    <asp:Button ID="btnDelete" Text="Delete" runat="server" CssClass="btn-delete flex items-center" CommandName="DeleteRecord" CommandArgument='<%# Eval("bider_id") %>' />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <asp:Label ID="ErrorMessageLabel" runat="server" Text=""></asp:Label>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

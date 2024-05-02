@@ -15,6 +15,15 @@ namespace AMS_6sem.adminpage
     {
 
         /// <summary>
+        /// biderfrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm biderfrom;
+
+        /// <summary>
         /// BidderRecordTable control.
         /// </summary>
         /// <remarks>
@@ -22,5 +31,14 @@ namespace AMS_6sem.adminpage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater BidderRecordTable;
+
+        /// <summary>
+        /// ErrorMessageLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorMessageLabel;
     }
 }

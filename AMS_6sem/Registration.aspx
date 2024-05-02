@@ -40,9 +40,9 @@
                     <div class="mb-4">
                         <label for="fileUserImage" class="block text-sm font-medium text-gray-600">User Image:</label>
                         <asp:FileUpload ID="fileUserImage" runat="server" CssClass="block m-1 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-200" accept="image/jpeg, image/jpg, image/png" />
-                        <p class="text-sm text-gray-400">Upload an image (JPEG, JPG, PNG) with a maximum size of 200 KB.</p>
+                        <p class="text-sm text-gray-400">Upload an image (JPEG, JPG, PNG) with a maximum size of 100 KB.</p>
                         <asp:RequiredFieldValidator ID="rfvFileUserImage" runat="server" ControlToValidate="fileUserImage" ErrorMessage="Please select an image file." CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
-                        <asp:CustomValidator ID="cvFileUserImageSize" runat="server" ControlToValidate="fileUserImage" ErrorMessage="Please upload an image with a maximum size of 200 KB." OnServerValidate="ValidateUserImageSize" ClientValidationFunction="validateFileSize_ClientValidate" CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:CustomValidator>
+                        <asp:CustomValidator ID="cvFileUserImageSize" runat="server" ControlToValidate="fileUserImage" ErrorMessage="Please upload an image with a minimum size 30kb and maximum size of 100 KB." OnServerValidate="ValidateUserImageSize" ClientValidationFunction="validateFileSize_ClientValidate" CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:CustomValidator>
                         <asp:CustomValidator ID="cvFileUserImageType" runat="server" ControlToValidate="fileUserImage" ErrorMessage="Only JPG, JPEG, and PNG files are allowed." OnServerValidate="ValidateUserImageType" ClientValidationFunction="validateFileType_ClientValidate" CssClass="text-red-500" Display="Dynamic" ValidationGroup="LoginGroup"></asp:CustomValidator>
                     </div>
 
@@ -104,40 +104,43 @@
         document.addEventListener("DOMContentLoaded", function () {
             function togglePasswordVisibility() {
                 var passwordInput = document.getElementById("<%= Password_R.ClientID %>");
-            var eyeOpenIcon = document.querySelector(".eyeOpen");
-            var eyeCloseIcon = document.querySelector(".eyeClose");
+                var eyeOpenIcon = document.querySelector(".eyeOpen");
+                var eyeCloseIcon = document.querySelector(".eyeClose");
 
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeOpenIcon.style.display = "none";
-                eyeCloseIcon.style.display = "block";
-            } else {
-                passwordInput.type = "password";
-                eyeOpenIcon.style.display = "block";
-                eyeCloseIcon.style.display = "none";
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    eyeOpenIcon.style.display = "none";
+                    eyeCloseIcon.style.display = "block";
+                } else {
+                    passwordInput.type = "password";
+                    eyeOpenIcon.style.display = "block";
+                    eyeCloseIcon.style.display = "none";
+                }
             }
-        }
 
-        document.querySelector(".eyeOpen").addEventListener("click", togglePasswordVisibility);
-        document.querySelector(".eyeClose").addEventListener("click", togglePasswordVisibility);
-    });
+            document.querySelector(".eyeOpen").addEventListener("click", togglePasswordVisibility);
+            document.querySelector(".eyeClose").addEventListener("click", togglePasswordVisibility);
+        });
     </script>
 
 
     <script>
+
         function validateFileSize_ClientValidate(sender, args) {
             var fileInput = document.getElementById('<%= fileUserImage.ClientID %>');
             if (fileInput.files.length > 0) {
                 var fileSize = fileInput.files[0].size;
-                var maxSize = 200 * 1024;
+                var minSize = 30 * 1024; 
+                var maxSize = 100 * 1024;
 
-                if (fileSize > maxSize) {
+                if (fileSize < minSize || fileSize > maxSize) {
                     args.IsValid = false;
                     return;
                 }
             }
             args.IsValid = true;
         }
+
 
         function validateFileType_ClientValidate(sender, args) {
             var fileInput = document.getElementById('<%= fileUserImage.ClientID %>');

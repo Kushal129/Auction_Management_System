@@ -15,13 +15,13 @@ namespace User_Side
     {
 
         /// <summary>
-        /// imgProduct control.
+        /// lblHighlightedItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProduct;
+        protected global::System.Web.UI.WebControls.Label lblHighlightedItem;
 
         /// <summary>
         /// lblProductName control.
@@ -87,6 +87,15 @@ namespace User_Side
         protected global::System.Web.UI.WebControls.Label lblLatestBidAmount;
 
         /// <summary>
+        /// imgProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgProduct;
+
+        /// <summary>
         /// txtBidAmount control.
         /// </summary>
         /// <remarks>
@@ -96,13 +105,49 @@ namespace User_Side
         protected global::System.Web.UI.WebControls.TextBox txtBidAmount;
 
         /// <summary>
-        /// btnPlaceBid control.
+        /// regexBidAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPlaceBid;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexBidAmount;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// txtNum1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNum1;
+
+        /// <summary>
+        /// txtNum2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNum2;
+
+        /// <summary>
+        /// lblResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResult;
 
         /// <summary>
         /// lblMessage control.

@@ -90,7 +90,7 @@ namespace AMS_6sem
 
             if (file != null && file.ContentLength > 0 && IsImageValid(file))
             {
-                if (file.ContentLength >= 100 * 1024)
+                if (file.ContentLength >= 30 * 1024 && file.ContentLength <= 100 * 1024)
                 {
                     string fileName = Path.GetFileName(file.FileName);
                     string userImgFolderPath = Server.MapPath("/Uploads/UserUploadImg/");
@@ -105,6 +105,7 @@ namespace AMS_6sem
 
             return userImgPath;
         }
+
 
         private bool IsImageValid(HttpPostedFile file)
         {

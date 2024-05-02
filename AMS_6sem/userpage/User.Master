@@ -1,19 +1,17 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="~/userpage/User.Master.cs" Inherits="User_Side.SiteMaster" %>
 
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>AMS | Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%-- <link rel="shortcut icon" href="https://static.vecteezy.com/system/resources/previews/007/258/573/original/ams-letter-logo-design-on-white-background-ams-creative-initials-letter-logo-concept-ams-letter-design-vector.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://static.vecteezy.com/system/resources/previews/007/258/573/original/ams-letter-logo-design-on-white-background-ams-creative-initials-letter-logo-concept-ams-letter-design-vector.jpg" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="Style.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />--%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" />
@@ -31,73 +29,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/dist/font/bootstrap-icons.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<style>
-    a:hover {
-        background: lightpurple;
-    }
 
-    .navbar {
-        background-color: #6b46c1; /* Purple color */
-        padding: 1rem 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1030;
-    }
-
-    .navbar-brand {
-        font-weight: bold;
-        color: #fff; /* White text color */
-    }
-
-        .navbar-brand:hover {
-            color: #8c64d3; /* Light purple on hover */
-        }
-
-    .nav-link {
-        color: #fff; /* White text color */
-    }
-
-        .nav-link:hover {
-            color: #8c64d3; /* Light  purple on hover */
-        }
-
-    .ovel {
-        background-color: #581C87; /* Purple color */
-        color: #fff; /* White text color */
-        padding: 4rem 0;
-        margin-top: auto;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        border-top-left-radius: 50% 20%;
-        border-top-right-radius: 50% 20%;
-        overflow: hidden;
-    }
-
-    .footer a {
-        color: #fff; /* White link color */
-    }
-
-        .footer a:hover {
-            color: #8c64d3; /* Light purple on hover */
-        }
-
-    .content-placeholder {
-        padding-top: 4rem; /* Add top padding to provide space after the navbar */
-        padding-bottom: 3rem; /* Add bottom padding to provide space before the footer */
-    }
-</style>
 <body class="font-sans bg-purple-100">
     <form id="Form1" runat="server">
         <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
         <div class="mm">
             <nav class="bg-purple-900 text-white navbar p-3" id="navbar">
-                <div class="container  mx-auto flex items-center justify-between">
-                    <a href="index.aspx" class="font-bold  bg-purple-900 text-white  hover:text-purple-800">AMS</a>
+                <div class="container mx-auto flex items-center justify-between">
+                    <a href="UserIndex.aspx" class="font-bold bg-purple-900 text-white hover:text-purple-800">AMS</a>
                     <div class="md:hidden">
                         <button id="mobile-menu-toggle" class="text-purple-900 focus:outline-none">
                             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -108,6 +48,7 @@
                             </svg>
                         </button>
                     </div>
+                    <asp:Label ID="lblUserName" runat="server" CssClass="text-white font-medium"></asp:Label>
                     <div class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:space-x-4" id="nav-links">
                         <a href="UserIndex.aspx" class="nav-link">Live Auction<span class="active-underline"></span></a>
                         <a href="UserUpdateProfile.aspx" class="nav-link">Profile<span class="active-underline"></span></a>
@@ -118,159 +59,157 @@
             </nav>
         </div>
 
-        
+
+
         <div class="content-placeholder">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
         </div>
         <footer class="bg-[#3d0f61] rounded-t-[180px] mt-5">
-        <div class="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-md">
-                <strong class="flex block text-center text-xl font-bold text-white sm:text-3xl">Want to stay updated on upcoming
+            <div class="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-md">
+                    <strong class="flex block text-center text-xl font-bold text-white sm:text-3xl">Want to stay updated on upcoming
                 auctions and exclusive deals?
-                </strong>
+                    </strong>
 
-                <form class="mt-6">
-                    <div class="relative max-w-lg">
-                        <label class="sr-only" for="email">Email </label>
+                    <form class="mt-6">
+                        <div class="relative max-w-lg">
+                            <label class="sr-only" for="email">Email </label>
 
-                        <input class="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
-                            id="email" type="email" placeholder="abcd@gmail.com" />
-                        <button
-                            class="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-purple-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-[#511289]">
-                            Subscribe
-                        </button>
-                    </div>
-                </form>
-            </div>
+                            <input class="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                                id="email" type="email" placeholder="abcd@gmail.com" />
+                            <button
+                                class="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-purple-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-[#511289]">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-            <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
-                <div class="mx-auto max-w-sm lg:max-w-none">
-                    <p class="mt-4 text-center text-white lg:text-left lg:text-lg">
-                        Welcome to our Auction Management System! Whether you're a seasoned bidder or new to the world of
+                <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
+                    <div class="mx-auto max-w-sm lg:max-w-none">
+                        <p class="mt-4 text-center text-white lg:text-left lg:text-lg">
+                            Welcome to our Auction Management System! Whether you're a seasoned bidder or new to the world of
                     auctions, our platform offers you a seamless experience to discover, bid, and win exciting items.
-                    </p>
+                        </p>
 
-                    <div class="mt-6 flex justify-center gap-4 lg:justify-start">
-                        <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
-                            <span class="sr-only">Facebook </span>
+                        <div class="mt-6 flex justify-center gap-4 lg:justify-start">
+                            <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
+                                <span class="sr-only">Facebook </span>
 
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
 
-                        <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
-                            <span class="sr-only">Instagram </span>
+                            <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
+                                <span class="sr-only">Instagram </span>
 
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
 
-                        <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
-                            <span class="sr-only">GitHub </span>
+                            <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
+                                <span class="sr-only">GitHub </span>
 
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
 
-                        <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
-                            <span class="sr-only">LinkedIn</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256">
-                                <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" style="mix-blend-mode: normal">
-                                    <g transform="scale(5.12,5.12)">
-                                        <path d="M41,4h-32c-2.76,0 -5,2.24 -5,5v32c0,2.76 2.24,5 5,5h32c2.76,0 5,-2.24 5,-5v-32c0,-2.76 -2.24,-5 -5,-5zM17,20v19h-6v-19zM11,14.47c0,-1.4 1.2,-2.47 3,-2.47c1.8,0 2.93,1.07 3,2.47c0,1.4 -1.12,2.53 -3,2.53c-1.8,0 -3,-1.13 -3,-2.53zM39,39h-6c0,0 0,-9.26 0,-10c0,-2 -1,-4 -3.5,-4.04h-0.08c-2.42,0 -3.42,2.06 -3.42,4.04c0,0.91 0,10 0,10h-6v-19h6v2.56c0,0 1.93,-2.56 5.81,-2.56c3.97,0 7.19,2.73 7.19,8.26z"></path>
+                            <a class="text-white transition hover:text-purple-500" href="#" target="_blank" rel="noreferrer">
+                                <span class="sr-only">LinkedIn</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" style="mix-blend-mode: normal">
+                                        <g transform="scale(5.12,5.12)">
+                                            <path d="M41,4h-32c-2.76,0 -5,2.24 -5,5v32c0,2.76 2.24,5 5,5h32c2.76,0 5,-2.24 5,-5v-32c0,-2.76 -2.24,-5 -5,-5zM17,20v19h-6v-19zM11,14.47c0,-1.4 1.2,-2.47 3,-2.47c1.8,0 2.93,1.07 3,2.47c0,1.4 -1.12,2.53 -3,2.53c-1.8,0 -3,-1.13 -3,-2.53zM39,39h-6c0,0 0,-9.26 0,-10c0,-2 -1,-4 -3.5,-4.04h-0.08c-2.42,0 -3.42,2.06 -3.42,4.04c0,0.91 0,10 0,10h-6v-19h6v2.56c0,0 1.93,-2.56 5.81,-2.56c3.97,0 7.19,2.73 7.19,8.26z"></path>
+                                        </g>
                                     </g>
-                                </g>
-                            </svg>
-                        </a>
+                                </svg>
+                            </a>
 
 
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
+                        <div>
+                            <strong class="font-medium text-lg text-white">Services</strong>
+                            <ul class="mt-6 space-y-1">
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Browse Auction Listings</a>
+                                </li>
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Place Bids on Items</a>
+                                </li>
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Track Auctions and Bids</a>
+                                </li>
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Manage Account and Payment</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <strong class="font-medium text-lg text-white">About Us</strong>
+                            <ul class="mt-6 space-y-1">
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">How it's Work</a>
+                                </li>
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Company Overview</a>
+                                </li>
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Our Mission</a>
+                                </li>
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Our Team</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div>
+                            <strong class="font-medium text-lg text-white">Support </strong>
+
+                            <ul class="mt-6 space-y-1">
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">FAQs </a>
+                                </li>
+
+                                <li>
+                                    <a class="text-purple-50 transition hover:text-purple-500" href="#">Contact </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
-                    <div>
-                        <strong class="font-medium text-lg text-white">Services</strong>
-                        <ul class="mt-6 space-y-1">
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Browse Auction Listings</a>
-                            </li>
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Place Bids on Items</a>
-                            </li>
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Track Auctions and Bids</a>
-                            </li>
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Manage Account and Payment</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <strong class="font-medium text-lg text-white">About Us</strong>
-                        <ul class="mt-6 space-y-1">
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">How it's Work</a>
-                            </li>
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Company Overview</a>
-                            </li>
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Our Mission</a>
-                            </li>
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Our Team</a>
-                            </li>
-                        </ul>
-
-                    </div>
-
-                    <div>
-                        <strong class="font-medium text-lg text-white">Support </strong>
-
-                        <ul class="mt-6 space-y-1">
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">FAQs </a>
-                            </li>
-
-                            <li>
-                                <a class="text-purple-50 transition hover:text-purple-500" href="#">Contact </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-16 border-t border-gray-100 pt-8">
-                <p class="text-center text-xs/relaxed text-white">
-                    © 2024 Auction Management System. All rights reserved.<br />
-                    Powered by
+                <div class="mt-16 border-t border-gray-100 pt-8">
+                    <p class="text-center text-xs/relaxed text-white">
+                        © 2024 Auction Management System. All rights reserved.<br />
+                        Powered by
                 <a href="#" class="text-white underline transition hover:text-purple-500">KH-Security & Devlopment.</a>
-                </p>
+                    </p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
     </form>
 </body>
 </html>
-
-
-
-  <script type="text/javascript">
-          function preventBack() {
-              window.history.forward();
-          }
-          setTimeout("preventBack()", 0);
-          window.onunload = function () { null };
-  </script>
+<script type="text/javascript">
+         function preventBack() {
+             window.history.forward();
+         }
+         setTimeout("preventBack()", 0);
+         window.onunload = function () { null };
+</script>

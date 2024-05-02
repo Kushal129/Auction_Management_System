@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label class="block text-gray-700 font-bold mb-2" for="fileUploadProductImage">Product Image:</label>
-                <asp:Image ID="imgProductImage" runat="server" CssClass="w-16 h-16 object-cover rounded-full" />
+                <asp:Image ID="imgProductImage" runat="server" CssClass="w-32 h-32 object-cover rounded-xl" />
                 <asp:FileUpload ID="fileUploadProductImage" runat="server" CssClass="block w-full m-3 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" />
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Only JPG, JPEG, or PNG files are allowed." ControlToValidate="fileUploadProductImage" ValidationExpression="^.*\.(jpg|JPG|jpeg|JPEG|png|PNG)$"></asp:RegularExpressionValidator>
             </div>

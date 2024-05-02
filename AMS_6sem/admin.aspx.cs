@@ -28,11 +28,9 @@ namespace AMS_6sem
                         int totalUsers = (int)userCommand.ExecuteScalar();
 
                         string userNameQuery = "SELECT fullname FROM tbl_user WHERE email = @Email";
-
                         using (SqlCommand command = new SqlCommand(userNameQuery, connection))
                         {
                             command.Parameters.AddWithValue("@Email", userEmail);
-
                             object result = command.ExecuteScalar();
 
                             if (result != null)
@@ -40,6 +38,20 @@ namespace AMS_6sem
                                 lblUserName.Text = "Welcome, " + result.ToString();
                                 lblTotalProducts.Text = totalProducts.ToString();
                                 lblTotalUsers.Text = totalUsers.ToString();
+
+                                string revenueQuery = "SELECT SUM(amount) FROM bider";
+                                SqlCommand revenueCommand = new SqlCommand(revenueQuery, connection);
+                                object totalRevenue = revenueCommand.ExecuteScalar();
+
+                                if (totalRevenue != null && totalRevenue != DBNull.Value)
+                                {
+                                    lblAmount.Text = "Rs " + Convert.ToDecimal(totalRevenue).ToString();
+                                }
+                                else
+                                {
+                                    lblAmount.Text = "No revenue yet.";
+                                }
+
                                 ScriptManager.RegisterStartupScript(this, GetType(), "DisableBackButton", "DisableBackButton();", true);
                             }
                             else

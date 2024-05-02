@@ -212,18 +212,6 @@ namespace AMS_6sem.adminpage
             return fileName;
         }
 
-        private DateTime? ParseDateTime(string dateTimeString, string format)
-        {
-            DateTime? result = null;
-            if (!string.IsNullOrWhiteSpace(dateTimeString))
-            {
-                if (DateTime.TryParseExact(dateTimeString, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime))
-                {
-                    result = parsedDateTime;
-                }
-            }
-            return result;
-        }
 
         private void ClearFormFields()
         {

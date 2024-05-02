@@ -54,7 +54,7 @@
 
     </asp:ContentPlaceHolder>
 
-    <footer class="bg-[#3d0f61] rounded-t-[180px] mt-5">
+    <footer class="bg-[#3d0f61] rounded-t-[180px] mt-5" id="contact-section">
         <div class="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-md">
                 <strong class="flex block text-center text-xl font-bold text-white sm:text-3xl">Want to stay updated on upcoming
@@ -193,13 +193,6 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var myCarousel = new bootstrap.Carousel(document.getElementById('controls-carousel'), {
-                interval: 2000,
-            });
-        });
-
-
         document.addEventListener('DOMContentLoaded', function () {
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const navLinks = document.getElementById('nav-links');
