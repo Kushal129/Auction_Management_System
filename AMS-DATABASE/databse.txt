@@ -57,3 +57,30 @@ CREATE TABLE tbl_wallet (
     block_amount DECIMAL(10, 2),
     FOREIGN KEY (uid) REFERENCES tbl_user(uid)
 );
+
+
+--------------------------------------------------------
+
+5:- WinnerReports
+
+CREATE TABLE WinnerReports (
+    AuctionItemId INT PRIMARY KEY,
+    WinningBidder INT,
+    WinningBidAmount DECIMAL(10, 2),
+    Wid INT
+);
+
+--------------------------------------------------------
+
+6:- tbl_orders
+
+CREATE TABLE tbl_orders (
+    OrderNo INT PRIMARY KEY,
+    Date DATE,
+    CustomerName NVARCHAR(255),
+    EmailAddress NVARCHAR(255),
+    PhoneNumber VARCHAR(10),
+    Product NVARCHAR(255),
+    Amount DECIMAL(18, 2),
+    Status INT
+);
