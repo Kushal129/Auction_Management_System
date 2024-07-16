@@ -81,7 +81,7 @@ namespace AMS_6sem
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential("21bmiit129@gmail.com", "rfkhielzatntivym");
+            smtp.Credentials = new System.Net.NetworkCredential("21bmiit129@gmail.com", "api");
             smtp.EnableSsl = true;
 
 
@@ -97,4 +97,3 @@ namespace AMS_6sem
     }
 }
 
-// rfkhielzatntivym
